@@ -18,6 +18,10 @@ db.once('open', () => console.log('Connected to Database'))
 app.use(express.json())
 app.use(cors())
 
+if (process.env.NODE_ENV === 'production') {
+        app.use(express.static('client/courseplanner/build'))
+}
+
 const courseRouter = require('./routes/courses')
 app.use('/courses', courseRouter)
 

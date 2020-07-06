@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon index.js",
-    "build": "cd start && npm run build",
-    "heroku-postbuild": "npm run install-client && npm run build",
-    "install-client": "cd client && npm install"
+    "build": "cd client && cd courseplanner && npm run build",
+    "install-client": "cd client && cd courseplanner && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build"
+    "start": "npm run devStart"
   },
   "author": "",
   "license": "ISC",
