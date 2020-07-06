@@ -1,0 +1,25 @@
+.choose {
+        background-color: white;
+        font-family: Ubuntu, serif;
+        font-size: 2vw;
+        text-align: center;
+        margin-top: 1%;
+        margin-bottom: 1%;
+}
+
+.eachDegree {
+        font-size: 1vw;
+        color: black;
+        font-family: Ubuntu, serif;
+        background-color: transparent;
+        border: none;
+        padding: 1em 1em;
+        width: 99%;
+        margin: 0.5%;
+        opacity: 0;
+        outline: none;
+}
+
+.eachDegree:hover {
+        text-shadow: 0.5px 0.5px;
+}

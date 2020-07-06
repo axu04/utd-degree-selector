@@ -1,0 +1,31 @@
+.bigContainer {
+        display: flex;
+}
+
+.title {
+        font-family: Ubuntu, serif;
+        font-size: 2vw;
+        text-align: center;
+}
+
+.container {
+        background-color: white;
+        width: 50%;
+        height: 90vh;
+        margin-top: 1%;
+        margin-right: 1%;
+        overflow: scroll;
+        border: 3px solid;
+        padding-bottom: 1%;
+}
+
+
+.courseList {
+        width: 50%;
+        height: 92vh;
+        margin-top: 1%;
+}
+
+::-webkit-scrollbar {
+        display: none;
+}

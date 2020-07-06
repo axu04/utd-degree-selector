@@ -1,0 +1,64 @@
+.wrapper {
+        display: flex;
+}
+
+.coursesHeader {
+        font-family: Ubuntu, serif;
+        text-align: center;
+        font-size: 1.5vw;
+        padding-top: 3%;
+        position: sticky;
+        top: 0;
+        background-color: white;
+}
+
+.dndGroup {
+        background-color: white;
+        width: 50%;
+        max-height: 85vh;
+        border: 3px solid;
+        overflow: scroll;
+        margin: 1%;
+        margin-top: 0%;
+        font-family: Ubuntu, serif;
+}
+
+.currentItem {
+        background-color: white;
+        text-align: center;
+        font-size: 0.75vw;
+        border: 1.5px solid;
+        margin-top: 1%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 89%;
+        margin-left: 3%;
+        border-radius: 4px;
+        padding: 2%;
+}
+
+.currentItem:hover {
+        box-shadow: 2px 2px gray;
+}
+
+.dndItem {
+        background-color: white;
+        text-align: center;
+        font-size: 0.75vw;
+        border: 1.5px solid;
+        margin-top: 1%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 89%;
+        margin-left: 3%;
+        border-radius: 4px;
+        padding: 2%;
+}
+
+.dndItem:hover {
+        box-shadow: 1px 1px gray;
+}
+
+.courseName {
+        font-size: 0.65vw;
+}

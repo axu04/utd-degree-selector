@@ -1,0 +1,18 @@
+GET http://localhost:3000/degrees
+
+###
+
+GET http://localhost:3000/degrees/Bachelor of Arts in Biology and Criminology
+###
+
+POST http://localhost:3000/degrees
+Content-Type: application/json
+
+{ 
+  "degreeTitle": "Testing",
+  "degreeData": [["asdfasf"], ["asdfsafd"]]
+}
+
+###
+
+DELETE http://localhost:3000/degrees/Bachelor of Arts in Biology and Criminology TEMP
