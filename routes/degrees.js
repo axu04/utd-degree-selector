@@ -23,6 +23,7 @@ router.post('/', (req, res) => {
         try {
                 const addDegree = newDegree.save()
                 res.status(201).json(addDegree)
+                console.log('degree added')
         } catch (err) {
                 res.status(400).jason({ message: err.message })
         }

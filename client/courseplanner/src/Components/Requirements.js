@@ -12,6 +12,7 @@ export default class Requirements extends React.Component {
 
         async componentDidMount() {
                 var data = await apis.getDegreeById(this.props.degreeName)
+                console.log(this.props.degreeName)
                 for (let i = 0; i < data.data.degreeData.length; i++) {
                         const dataInformation = data.data.degreeData[i][0];
                         if (i === 0) {

@@ -1,5 +1,6 @@
 import React from 'react'
 import apis from '../api/api'
+import axios from 'axios'
 import styles from './DegreeSelector.module.css'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'react-router-dom'
@@ -17,13 +18,16 @@ export default class DegreeSelector extends React.Component {
                 var degrees = []
                 for (let i = 0; i < degreeData.data.length; i++) {
                         const degreeName = degreeData.data[i].degreeTitle
+                        console.log(degreeName)
                         degrees.push(degreeName)
                 }
+
                 const data = degrees.sort()
                 this.setState({ degrees: data })
         }
 
         render() {
+                console.log(this.state.degrees)
                 return (<div>
                                 <Fade top>
                                         <div className={styles.choose}>Choose Your Degree<hr /></div>

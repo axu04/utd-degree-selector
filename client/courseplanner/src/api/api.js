@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-        baseURL: 'http://localhost:3000'
+        baseURL: 'http://localhost:5000'
         // baseURL: 'mongodb+srv://alecxu:Zsqwl58Ldo2prdHY@cluster0.xyl0w.mongodb.net/<dbname>?retryWrites=true&w=majority'
 })
 

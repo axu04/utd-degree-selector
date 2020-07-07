@@ -164,9 +164,9 @@ async function changeData() {
         apis.insertDegree({ degreeTitle, degreeData })
 }
 
-changeData()
+// changeData()
 
-// scrapeDegrees('https://catalog.utdallas.edu/2020/undergraduate/programs/atec/arts-and-technology')
+scrapeDegrees('https://catalog.utdallas.edu/2020/undergraduate/programs/atec/arts-and-technology')
 
 // deleteAllDegrees()
 
