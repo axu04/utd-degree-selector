@@ -2,7 +2,7 @@ const axios = require('axios')
 
 
 const api = axios.create({
-        baseURL: `utd-degree-selector.herokuapp.com/`
+        baseURL: `https://utd-degree-selector.herokuapp.com/`
         // baseURL: 'mongodb+srv://alecxu:abcdef123g@cluster0.xyl0w.mongodb.net/<dbname>?retryWrites=true&w=majority'
 })
 
