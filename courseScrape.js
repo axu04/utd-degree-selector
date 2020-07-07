@@ -1,10 +1,9 @@
 //courseScrape.js
 //File that contains the script to scrape course data using puppeteer
 
-// "Instructor and Associate Dean Consent Required" - NSC 4V91
-// "Signature of instructor and secondary reader on proposed project outline required" - VPAS 4V99 
 const puppeteer = require('puppeteer')
 const apis = require('./api')
+const Course = require('./models/courses')
 
 //Add "open for good gpa people" - CLDP 4394
 //Fix duplicate department consent required - FIN 4380
@@ -135,6 +134,20 @@ async function scrapeWebsite(url, courseTopic) {
                 if (requirements === '') {
                         requirements = 'None'
                 }
+
+                // const newCourse = new Course({
+                //         courseLabel,
+                //         courseTitle,
+                //         courseTopic,
+                //         semesterHours,
+                //         requirements
+                // })
+                // try {
+                //         const addCourse = await newCourse.save()
+                //         res.status(201).json(addCourse)
+                // } catch (err) {
+                //         res.status(400).json({ message: err.message })
+                // }
 
                 apis.insertCourse({ courseLabel, courseTitle, courseTopic, semesterHours, requirements })
                 
