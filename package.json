@@ -5,16 +5,15 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon index.js",
-    "build": "cd client && cd courseplanner && npm run build",
-    "install-client": "cd client && cd courseplanner && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "npm run devStart"
+    "client": "cd client && cd courseplanner && npm start",
+    "start": "concurrently \"npm run devStart\" \"npm run client\" "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
