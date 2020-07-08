@@ -27,7 +27,6 @@ export default class DegreeSelector extends React.Component {
         }
 
         render() {
-                console.log(this.state.degrees)
                 return (<div>
                                 <Fade top>
                                         <div className={styles.choose}>Choose Your Degree<hr /></div>
