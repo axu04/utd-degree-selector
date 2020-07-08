@@ -8,7 +8,7 @@ async function scrapeDegrees(url) {
         const requirements = []
         var counter = 1
         // var bigCounter = 1
-        const degreeTitle = 'Bachelor of Arts in Arts, Technology, and Emerging Communication'
+        const degreeTitle = 'Bachelor of Arts in test'
         const twoNums = []
         const threeNums = []
         const ignore = []

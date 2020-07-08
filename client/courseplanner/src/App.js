@@ -15,7 +15,7 @@ export default class App extends React.Component {
                 return <Router> 
                                 <Switch>
                                         <Route exact path='/'><Homepage /></Route>
-                                        <Route path='/degrees'><DegreeSelector /></Route>
+                                        <Route path='/degreeSelector'><DegreeSelector /></Route>
                                         <Route path='/:title' component={CourseSelector}></Route>
                                 </Switch>
                         </Router>

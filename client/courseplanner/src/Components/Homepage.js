@@ -8,7 +8,7 @@ export default class Homepage extends React.Component {
                 return  <div>
                                 <Fade left><div className={styles.title}>UTD 4-Year Planner</div></Fade>
                                 <Fade right>
-                                        <Link to='/degrees'>
+                                        <Link to='/degreeSelector'>
                                                 <button className={styles.degreeButton}>Plan Your Degree Now!</button>
                                         </Link>
                                 </Fade>
