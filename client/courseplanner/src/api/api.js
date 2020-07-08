@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-        baseURL: 'https://utd-degree-selector.herokuapp.com/'
+        baseURL: 'https://utd-degree-selector.herokuapp.com/api/'
         // baseURL: 'mongodb+srv://alecxu:Zsqwl58Ldo2prdHY@cluster0.xyl0w.mongodb.net/<dbname>?retryWrites=true&w=majority'
 })
 
