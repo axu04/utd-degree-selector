@@ -8,7 +8,6 @@ const cors = require('cors')
 const MONGODB_URI = 'mongodb+srv://alecxu:abcdefg123@cluster0.xyl0w.mongodb.net/<dbname>?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
 
-// mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connect(MONGODB_URI || process.env.DEGREE_DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection

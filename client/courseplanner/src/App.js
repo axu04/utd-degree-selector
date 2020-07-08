@@ -1,7 +1,5 @@
 import React from 'react'
-import api from './api/api'
 import {
-        BrowserRouter as Router,
         Switch,
         Route,
         HashRouter

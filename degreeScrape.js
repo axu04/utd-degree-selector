@@ -8,7 +8,7 @@ async function scrapeDegrees(url) {
         const requirements = []
         var counter = 1
         // var bigCounter = 1
-        const degreeTitle = 'Bachelor of Arts in test'
+        const degreeTitle = 'Bachelor of Arts in Arts, Technology, and Emerging Communication'
         const twoNums = []
         const threeNums = []
         const ignore = []
@@ -40,10 +40,6 @@ async function scrapeDegrees(url) {
                 }
                 else if (isCharNumber(lastChar)) {
                         courseReqFinal = courseReqFinal.slice(0, courseReqFinal.length-1)
-                }
-
-                if (i === 25 || i === 40) {
-                        courseReqFinal = courseReqFinal.replace('Calculus3', 'Calculus')
                 }
 
                 const className = await courseRequirements.getProperty('className')
