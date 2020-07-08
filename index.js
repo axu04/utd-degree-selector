@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 
         app.get('*', function(req, res) {
                 res.sendFile(path.join(__dirname, 'client/courseplanner/build', 'index.html'));
+        }
 }
 
 const courseRouter = require('./routes/courses')
