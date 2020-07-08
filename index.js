@@ -20,11 +20,12 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
-        app.use(express.static('client/courseplanner/build'))
+        app.use(express.static(path.join(__dirname, 'client/courseplanner/build')))
 
         app.get('*', function(req, res) {
-                res.sendFile(path.join(__dirname, 'client/courseplanner/build', 'index.html'));
-        }
+                res.sendFile(path.join(__dirname, 'client/courseplanner/build', 'index.html'))
+
+        })
 }
 
 const courseRouter = require('./routes/courses')
