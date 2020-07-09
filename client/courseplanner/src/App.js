@@ -7,6 +7,7 @@ import {
 import Homepage from './Components/Homepage'
 import DegreeSelector from './Components/DegreeSelector'
 import CourseSelector from './Components/CourseSelector'
+import CourseLayout from './Components/CourseLayout'
 
 export default class App extends React.Component {
 
@@ -15,7 +16,9 @@ export default class App extends React.Component {
                                 <Switch>
                                         <Route exact path='/'><Homepage /></Route>
                                         <Route path='/degreeSelector'><DegreeSelector /></Route>
+                                        <Route path='/courseLayout' component={CourseLayout}></Route>
                                         <Route path='/:title' component={CourseSelector}></Route>
+                                        
                                 </Switch>
                         </HashRouter>
         }

@@ -1,0 +1,118 @@
+.choosingWrapper {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: repeat(3, 1fr);
+}
+
+.selectedWrapper {
+        border: 2px solid;
+        height: 96vh;
+        overflow: scroll;
+        padding-bottom: 1%;
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+        margin: 2%;
+}
+
+.semester1Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        grid-column: 2 / 3;
+        grid-row: 1;
+        margin: 2%;
+}
+
+.semester2Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        margin: 2%;
+}
+.semester3Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        margin: 2%;
+}
+
+.semester4Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        margin: 2%;
+}
+
+.semester5Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        margin: 2%;
+}
+
+.semester6Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        margin: 2%;
+}
+
+.semester7Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        margin: 2%;
+}
+
+.semester8Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        margin: 2%;
+}
+
+.selectedHeader {
+        font-family: Ubuntu, serif;
+        text-align: center;
+        font-size: 1.5vw;
+        padding-top: 3%;
+        position: sticky;
+        top: 0;
+        background-color: white;
+}
+
+.selectedCourse {
+        font-family: Ubuntu, serif;
+        background-color: white;
+        text-align: center;
+        font-size: 0.75vw;
+        border: 1.5px solid;
+        margin-top: 1%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 89%;
+        margin-left: 3%;
+        border-radius: 4px;
+        padding: 2%;
+}
+
+.selectedCourse:hover {
+        box-shadow: 1px 1px gray;
+}
+
+.draggingCourse {
+        font-family: Ubuntu, serif;
+        background-color: white;
+        text-align: center;
+        font-size: 0.75vw;
+        border: 1.5px solid;
+        margin-top: 1%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 89%;
+        margin-left: 3%;
+        border-radius: 4px;
+        padding: 2%;
+}
+
+.semesterWrapper {
+        border: 2px solid;
+        height: 45vh;
+        width: 10%;
+}
+
+::-webkit-scrollbar {
+        display: none;
+}

@@ -1,0 +1,14 @@
+.selectionFinish {
+        font-family: Ubuntu, serif;
+        background-color: transparent;
+        border: 2px solid;
+        margin-left: 76.5%;
+        padding: 2%;
+        padding-left: 6%;
+        padding-right: 6%;
+        border-radius: 8px;
+}
+
+.selectionFinish:hover {
+        box-shadow: 1px 1px gray;
+}

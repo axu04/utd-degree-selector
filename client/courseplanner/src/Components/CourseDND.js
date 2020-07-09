@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styles from './CourseDND.module.css'
 import apis from '../api/api'
+import NextButton from './NextButton'
 
 function CourseDND() {
         const [list, setList] = useState([])
@@ -13,6 +14,7 @@ function CourseDND() {
                 async function getData() {
                         var courseData = await apis.getAllCourses()
                         var classes = courseData.data
+                        console.log(classes)
                         setList([ { title: 'Available Courses', courses: classes },{ title: 'Selected Courses', courses: [] }])
                 }
                 getData()
@@ -32,12 +34,13 @@ function CourseDND() {
         }
 
         const handleDragEnter = (e, params) => {
+                console.log(dragItem.current)
                 if (params.onDiv === 'onDiv' || params.arrayIndex === dragItem.current.arrayIndex) {
                         return
                 }
 
                 if (params.onDiv === undefined) {
-                        params.itemIndex = params.typeList.courses.length + 1;
+                        params.itemIndex = params.typeList.courses.length;
                 }
                 const currentItem = dragItem.current
                 if (e.target !== dragNode.current) {
@@ -48,7 +51,6 @@ function CourseDND() {
                                 return newList
                         })
                 }
-                console.log(list)
         }
 
         const handleDragEnd = (e) => {
@@ -76,35 +78,41 @@ function CourseDND() {
                 return styles.dndItem
         }
 
-        return (<div className={styles.wrapper}>
-                        {list.map((typeList, arrayIndex) => (
-                                <div 
-                                        key={arrayIndex} 
-                                        className={styles.dndGroup} 
-                                        onDragEnter={dragging && !typeList.courses.length ? e => handleDragEnter(e, {arrayIndex, itemIndex: 0, onDiv: 'first'}) : 
-                                                        dragging ? e => handleDragEnter(e, {arrayIndex, itemIndex: typeList.courses.length-1, typeList}) : null }
-                                        onDragEnd={e => e.preventDefault()}
-                                        onDragOver={dragOver}
-                                        onDrop={e => e.preventDefault()}
-                                >
-                                        <div className={styles.coursesHeader}>
-                                                {typeList.title} <hr />
-                                        </div>
-                                {typeList.courses.map((course, itemIndex) => (
+        const selectedCourses = list
+
+        return (<div>
+                        <div className={styles.wrapper}>
+                                {list.map((typeList, arrayIndex) => (
                                         <div 
-                                                draggable
-                                                onDragStart={ e => {handleDragStart(e, {arrayIndex, itemIndex})}}
-                                                onDragEnter={dragging ? (e) => {handleDragEnter(e, {arrayIndex, itemIndex, onDiv: 'onDiv'})} : null}
-                                                className={dragging ? getStyles({arrayIndex, itemIndex, typeList}) : styles.dndItem } 
+                                                key={arrayIndex} 
+                                                className={styles.dndGroup} 
+                                                onDragEnter={dragging && !typeList.courses.length ? e => handleDragEnter(e, {arrayIndex, itemIndex: 0, onDiv: 'first'}) : 
+                                                                dragging ? e => handleDragEnter(e, {arrayIndex, itemIndex: typeList.courses.length-1, typeList}) : null }
                                                 onDragEnd={e => e.preventDefault()}
-                                                key={itemIndex} 
+                                                onDragOver={dragOver}
+                                                onDrop={e => e.preventDefault()}
                                         >
-                                                <div>{course.courseLabel}</div>
-                                                <div>{course.courseTitle}</div>
-                                        </div>
+                                                <div className={styles.coursesHeader}>
+                                                        {typeList.title} <hr />
+                                                </div>
+                                        {typeList.courses.map((course, itemIndex) => (
+                                                <div 
+                                                        draggable
+                                                        onDragStart={ e => {handleDragStart(e, {arrayIndex, itemIndex})}}
+                                                        onDragEnter={dragging ? (e) => {handleDragEnter(e, {arrayIndex, itemIndex, onDiv: 'onDiv'})} : null}
+                                                        className={dragging ? getStyles({arrayIndex, itemIndex, typeList}) : styles.dndItem } 
+                                                        onDragEnd={e => e.preventDefault()}
+                                                        key={itemIndex} 
+                                                >
+                                                        <div>{course.courseLabel}</div>
+                                                        <div>{course.courseTitle}</div>
+                                                </div>
+                                        ))}
+                                </div>
                                 ))}
+
                         </div>
-                        ))}
+                        <NextButton selectedCourses={selectedCourses}/>
                 </div>)
 }
 
