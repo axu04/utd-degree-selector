@@ -20,47 +20,55 @@
         grid-column: 2 / 3;
         grid-row: 1;
         margin: 2%;
+        overflow: scroll;
 }
 
 .semester2Wrapper {
         border: 2px solid;
         height: 40vh;
         margin: 2%;
+        overflow: scroll;
 }
 .semester3Wrapper {
         border: 2px solid;
         height: 40vh;
         margin: 2%;
+        overflow: scroll;
 }
 
 .semester4Wrapper {
         border: 2px solid;
         height: 40vh;
         margin: 2%;
+        overflow: scroll;
 }
 
 .semester5Wrapper {
         border: 2px solid;
         height: 40vh;
         margin: 2%;
+        overflow: scroll;
 }
 
 .semester6Wrapper {
         border: 2px solid;
         height: 40vh;
         margin: 2%;
+        overflow: scroll;
 }
 
 .semester7Wrapper {
         border: 2px solid;
         height: 40vh;
         margin: 2%;
+        overflow: scroll;
 }
 
 .semester8Wrapper {
         border: 2px solid;
         height: 40vh;
         margin: 2%;
+        overflow: scroll;
 }
 
 .selectedHeader {
