@@ -12,7 +12,7 @@
 
 .selectedWrapper {
         border: 2px solid;
-        height: 90vh;
+        height: 95vh;
         overflow: scroll;
         padding-bottom: 1%;
         grid-column: 1 / 5;

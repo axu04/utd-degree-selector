@@ -16,6 +16,7 @@ function CourseDND() {
                 async function getData() {
                         var courseData = await apis.getAllCourses()
                         var classes = courseData.data
+                        classes.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
                         setList([ { title: 'Available Courses', courses: classes },{ title: 'Selected Courses', courses: [] }])
                         setTempList([ { title: 'Available Courses', courses: classes },{ title: 'Selected Courses', courses: [] }])
                 }
@@ -58,9 +59,6 @@ function CourseDND() {
                 var currentItem = dragItem.current
                 var newCurrentItem = currentItem.itemIndex
 
-                // if (params.onDiv === undefined) {
-                //         params.itemIndex = params.typeList.courses.length;
-                // } 
                 if (params.onDiv === undefined && currentItem.arrayIndex === 0) {
                         params.itemIndex = list[1].courses.length;
                 }
@@ -115,7 +113,7 @@ function CourseDND() {
         var selectedCourses = []
         if (tempList[0] !== undefined) {
                 selectedCourses = [ { title: 'Available Courses', courses: list[0].courses.filter((course) => { 
-                        return course.courseLabel.indexOf(searchValue) !== -1 }
+                        return course.courseLabel.indexOf(searchValue.toUpperCase()) !== -1 }
                 )},{ title: 'Selected Courses', courses: list[1].courses }]
         }
 
@@ -134,13 +132,13 @@ function CourseDND() {
                                                 <div className={styles.coursesHeader}>
                                                         {typeList.title} <hr />
                                                 </div>
-                                                {typeList.title === 'Available Courses' ? <input className={styles.courseFilter}
-                                                                                                placeholder="Filter Courses" 
-                                                                                                type="text"
-                                                                                                value={searchValue}
-                                                                                                onChange={e => updateFilter(e)}
-                                                                                                >
-                                                </input> : null}
+                                                        {typeList.title === 'Available Courses' ? <input className={styles.courseFilter}
+                                                                                                        placeholder="ex. CS 1337" 
+                                                                                                        type="text"
+                                                                                                        value={searchValue}
+                                                                                                        onChange={e => updateFilter(e)}
+                                                                                                        >
+                                                        </input> : null}
                                         {typeList.courses.map((course, itemIndex) => (
                                                 <div 
                                                         draggable
