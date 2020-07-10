@@ -1,24 +1,30 @@
 .choosingWrapper {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-auto-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(16, 1fr);
+        /*
+        If you want to change the way the columns are aligned then switch
+        the 16 to an 18 and make the button go in column 17
+        */
+        grid-auto-rows: repeat(5, 1fr);
+        height: 90vh;
+        row-gap: 0vh;
 }
 
 .selectedWrapper {
         border: 2px solid;
-        height: 96vh;
+        height: 90vh;
         overflow: scroll;
         padding-bottom: 1%;
-        grid-column: 1 / 2;
-        grid-row: 1 / 3;
+        grid-column: 1 / 5;
+        grid-row: 1 / 6;
         margin: 2%;
 }
 
 .semester1Wrapper {
         border: 2px solid;
         height: 40vh;
-        grid-column: 2 / 3;
-        grid-row: 1;
+        grid-column: 5 / 8;
+        grid-row: 1 / 3;
         margin: 2%;
         overflow: scroll;
 }
@@ -26,19 +32,27 @@
 .semester2Wrapper {
         border: 2px solid;
         height: 40vh;
+        grid-column: 8 / 11;
+        grid-row: 1 / 3;
         margin: 2%;
         overflow: scroll;
 }
+/*
 .semester3Wrapper {
         border: 2px solid;
         height: 40vh;
+        grid-column: 7 / 9;
+        grid-row: 1;
         margin: 2%;
         overflow: scroll;
 }
+*/
 
 .semester4Wrapper {
         border: 2px solid;
         height: 40vh;
+        grid-column: 11 / 14;
+        grid-row: 1 / 3;
         margin: 2%;
         overflow: scroll;
 }
@@ -46,20 +60,28 @@
 .semester5Wrapper {
         border: 2px solid;
         height: 40vh;
+        grid-column: 14 / 17;
+        grid-row: 1 / 3;
         margin: 2%;
         overflow: scroll;
 }
 
+/*
 .semester6Wrapper {
         border: 2px solid;
         height: 40vh;
+        grid-column: 7 / 9;
+        grid-row: 2;
         margin: 2%;
         overflow: scroll;
 }
+*/
 
 .semester7Wrapper {
         border: 2px solid;
         height: 40vh;
+        grid-column: 5 / 8;
+        grid-row: 3 / 5;
         margin: 2%;
         overflow: scroll;
 }
@@ -67,9 +89,52 @@
 .semester8Wrapper {
         border: 2px solid;
         height: 40vh;
+        grid-column: 8 / 11;
+        grid-row: 3 / 5;
         margin: 2%;
         overflow: scroll;
 }
+
+/*
+.semester9Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        grid-column: 7 / 9;
+        grid-row: 3;
+        margin: 2%;
+        overflow: scroll;
+}
+*/
+
+.semester10Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        grid-column: 11 / 14;
+        grid-row: 3 / 5;
+        margin: 2%;
+        overflow: scroll;
+}
+
+.semester11Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        grid-column: 14 / 17;
+        grid-row: 3 / 5;
+        margin: 2%;
+        overflow: scroll;
+}
+
+/*
+.semester12Wrapper {
+        border: 2px solid;
+        height: 40vh;
+        grid-column: 7 / 9;
+        grid-row: 4;
+        margin: 2%;
+        overflow: scroll;
+}
+*/
+
 
 .selectedHeader {
         font-family: Ubuntu, serif;

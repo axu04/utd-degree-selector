@@ -18,14 +18,14 @@ function CourseLayout(data) {
                 }
                 setList([{title: 'Selected Courses', stylingName: 'selectedWrapper', courses: courses},
                         {title: 'First Year Fall', stylingName: 'semester1Wrapper', courses: []}, 
-                        {title: 'Second Year Fall', stylingName: 'semester2Wrapper', courses: []},
-                        {title: 'Third Year Fall', stylingName: 'semester3Wrapper', courses: []},
-                        {title: 'Fourth Year Fall', stylingName: 'semester4Wrapper', courses: []},
-                        {title: 'First Year Spring', stylingName: 'semester5Wrapper', courses: []},
-                        {title: 'Second Year Spring', stylingName: 'semester6Wrapper', courses: []},
-                        {title: 'Third Year Spring', stylingName: 'semester7Wrapper', courses: []},
-                        {title: 'Fourth Year Spring', stylingName: 'semester8Wrapper', courses: []}])
-        }, []) 
+                        {title: 'First Year Spring', stylingName: 'semester2Wrapper', courses: []},
+                        {title: 'Second Year Fall', stylingName: 'semester4Wrapper', courses: []},
+                        {title: 'Second Year Spring', stylingName: 'semester5Wrapper', courses: []},
+                        {title: 'Third Year Fall', stylingName: 'semester7Wrapper', courses: []},
+                        {title: 'Third Year Spring', stylingName: 'semester8Wrapper', courses: []},
+                        {title: 'Fourth Year Fall', stylingName: 'semester10Wrapper', courses: []},
+                        {title: 'Fourth Year Spring', stylingName: 'semester11Wrapper', courses: []}
+        ])}, [])
 
         const handleDragStart = (e, params) => {
                 const target = e.target
