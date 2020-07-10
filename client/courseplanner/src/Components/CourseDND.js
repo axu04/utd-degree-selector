@@ -37,6 +37,7 @@ function CourseDND() {
         }
 
         const handleDragStart = (e, params) => {
+                resetTempList()
                 const target = e.target
 
                 e.dataTransfer.setData('cardId', target.id)
@@ -47,7 +48,6 @@ function CourseDND() {
                 setTimeout(() => {
                         setDragging(true)
                 }, 0) 
-                resetTempList()
         }
 
         const handleDragEnter = (e, params) => {
@@ -55,24 +55,25 @@ function CourseDND() {
                         return
                 }
 
-                if (params.onDiv === undefined) {
-                        params.itemIndex = params.typeList.courses.length;
-                } 
                 var currentItem = dragItem.current
                 var newCurrentItem = currentItem.itemIndex
-                if (currentItem.arrayIndex === 0 && searchValue !== '') {
-                        newCurrentItem = list[0].courses.indexOf(tempList[0].courses[currentItem.itemIndex])
-                        console.log(tempList[0].courses[currentItem.itemIndex])
-                        
+
+                // if (params.onDiv === undefined) {
+                //         params.itemIndex = params.typeList.courses.length;
+                // } 
+                if (params.onDiv === undefined && currentItem.arrayIndex === 0) {
+                        params.itemIndex = list[1].courses.length;
                 }
+                if (params.onDiv === undefined && currentItem.arrayIndex === 1) {
+                        params.itemIndex = list[0].courses.length;
+                } 
+
+                if (currentItem.arrayIndex !== 1) {
+                        newCurrentItem = list[0].courses.indexOf(tempList[0].courses[currentItem.itemIndex])
+                }
+
                 if (e.target !== dragNode.current) {
-                        setTempList(oldList => {
-                                let newList = JSON.parse(JSON.stringify(oldList))
-                                newList[params.arrayIndex].courses.splice(params.itemIndex, 0, newList[currentItem.arrayIndex].courses.splice(currentItem.itemIndex, 1)[0])
-                                dragItem.current = params
-                                return newList
-                        })
-                        setList(oldList => {
+                        setList((oldList) => {
                                 let newList = JSON.parse(JSON.stringify(oldList))
                                 newList[params.arrayIndex].courses.splice(params.itemIndex, 0, newList[currentItem.arrayIndex].courses.splice(newCurrentItem, 1)[0])
                                 dragItem.current = params
@@ -92,6 +93,7 @@ function CourseDND() {
                         newList[0].courses.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
                         return newList
                 })
+                resetTempList()
         }
 
         const dragOver = e => {
@@ -116,13 +118,14 @@ function CourseDND() {
                         return course.courseLabel.indexOf(searchValue) !== -1 }
                 )},{ title: 'Selected Courses', courses: list[1].courses }]
         }
+
         return (<div>
                         <div className={styles.wrapper}>
                                 {selectedCourses.map((typeList, arrayIndex) => (
                                         <div 
                                                 key={arrayIndex} 
                                                 className={styles.dndGroup} 
-                                                onDragEnter={dragging && !typeList.courses.length ? e => handleDragEnter(e, {arrayIndex, itemIndex: 0, typeList}) : 
+                                                onDragEnter={dragging && !typeList.courses.length ? e => handleDragEnter(e, {arrayIndex, itemIndex: 0, onDiv: 'first', typeList}) : 
                                                                 dragging ? e => handleDragEnter(e, {arrayIndex, itemIndex: typeList.courses.length-1, typeList}) : null }
                                                 onDragEnd={e => e.preventDefault()}
                                                 onDragOver={dragOver}
