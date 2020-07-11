@@ -6,8 +6,11 @@ import NextButton from './NextButton'
 function CourseDND() {
         const [list, setList] = useState([])
         const [tempList, setTempList] = useState([])
+        const [originalList, setOriginalList] = useState([])
+        const [courseNames, setCourseNames] = useState([])
         const [dragging, setDragging] = useState(false)
         const [searchValue, setSearchValue] = useState('')
+        const [onClickArray, setOnClickArray] = useState([])
 
         const dragItem = useRef()
         const dragNode = useRef()
@@ -19,6 +22,13 @@ function CourseDND() {
                         classes.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
                         setList([ { title: 'Available Courses', courses: classes },{ title: 'Selected Courses', courses: [] }])
                         setTempList([ { title: 'Available Courses', courses: classes },{ title: 'Selected Courses', courses: [] }])
+                        setOriginalList([ { title: 'Available Courses', courses: classes },{ title: 'Selected Courses', courses: [] }])
+
+                        var tempArray = []
+                        for (let i = 0; i < classes.length; i++) {
+                                tempArray.push(false)
+                        }
+                        setOnClickArray(tempArray)
                 }
                 getData()
         }, [])
@@ -77,6 +87,12 @@ function CourseDND() {
                                 dragItem.current = params
                                 return newList
                         })
+                        setTempList((oldList) => {
+                                let newList = JSON.parse(JSON.stringify(oldList))
+                                newList[params.arrayIndex].courses.splice(params.itemIndex, 0, newList[currentItem.arrayIndex].courses.splice(currentItem.itemIndex, 1)[0])
+                                dragItem.current = params
+                                return newList
+                        })
                 }
         }
 
@@ -109,12 +125,40 @@ function CourseDND() {
         const updateFilter = (e) => {
                 setSearchValue(e.target.value)
         }
+
+        const changeOnClickState = (e, params) => {
+                if (dragging) {
+                        return
+                }
+
+                var courseNameArray = []
+                for (let i = 0; i < originalList[0].courses.length; i++) {
+                        courseNameArray.push(originalList[0].courses[i].courseLabel)
+                }
+
+                setOnClickArray(oldArray => {
+                        let newArray = [...oldArray]
+                        resetTempList()
+                        if (params.arrayIndex === 0) {
+                                newArray[courseNameArray.indexOf(tempList[params.arrayIndex].courses[params.itemIndex].courseLabel)] = !newArray[courseNameArray.indexOf(tempList[params.arrayIndex].courses[params.itemIndex].courseLabel)]
+                        } else {
+                                newArray[courseNameArray.indexOf(list[params.arrayIndex].courses[params.itemIndex].courseLabel)] = !newArray[courseNameArray.indexOf(list[params.arrayIndex].courses[params.itemIndex].courseLabel)]
+                        }
+                        return newArray
+                })
+        }
         
         var selectedCourses = []
         if (tempList[0] !== undefined) {
                 selectedCourses = [ { title: 'Available Courses', courses: list[0].courses.filter((course) => { 
                         return course.courseLabel.indexOf(searchValue.toUpperCase()) !== -1 }
                 )},{ title: 'Selected Courses', courses: list[1].courses }]
+        }
+        var courseNameArray = []
+        if (originalList[0] !== undefined) {
+                for (let i = 0; i < originalList[0].courses.length; i++) {
+                        courseNameArray.push(originalList[0].courses[i].courseLabel)
+                }
         }
 
         return (<div>
@@ -132,24 +176,32 @@ function CourseDND() {
                                                 <div className={styles.coursesHeader}>
                                                         {typeList.title} <hr />
                                                 </div>
-                                                        {typeList.title === 'Available Courses' ? <input className={styles.courseFilter}
-                                                                                                        placeholder="ex. CS 1337" 
-                                                                                                        type="text"
-                                                                                                        value={searchValue}
-                                                                                                        onChange={e => updateFilter(e)}
-                                                                                                        >
-                                                        </input> : null}
+                                                {typeList.title === 'Available Courses' ? <input className={styles.courseFilter}
+                                                                                                placeholder="Course Filter (ex. CS 1337)" 
+                                                                                                type="text"
+                                                                                                value={searchValue}
+                                                                                                onChange={e => updateFilter(e)}
+                                                                                                >
+                                                </input> : null}
                                         {typeList.courses.map((course, itemIndex) => (
-                                                <div 
-                                                        draggable
-                                                        onDragStart={ e => {handleDragStart(e, {arrayIndex, itemIndex})}}
-                                                        onDragEnter={dragging ? (e) => {handleDragEnter(e, {arrayIndex, itemIndex, onDiv: 'onDiv', typeList})} : null}
-                                                        className={dragging ? getStyles({arrayIndex, itemIndex, typeList}) : styles.dndItem } 
-                                                        onDragEnd={e => e.preventDefault()}
-                                                        key={itemIndex} 
-                                                >
-                                                        <div>{course.courseLabel}</div>
-                                                        <div>{course.courseTitle}</div>
+                                                <div key={itemIndex} >
+                                                        <div 
+                                                                draggable
+                                                                onDragStart={ e => {handleDragStart(e, {arrayIndex, itemIndex})}}
+                                                                onDragEnter={dragging ? (e) => {handleDragEnter(e, {arrayIndex, itemIndex, onDiv: 'onDiv', typeList})} : null}
+                                                                className={dragging ? getStyles({arrayIndex, itemIndex, typeList}) : styles.dndItem } 
+                                                                onDragEnd={e => e.preventDefault()}
+                                                                onClick={e => changeOnClickState(e, {arrayIndex, itemIndex})}
+                                                        >
+                                                                <div>{course.courseLabel}</div>
+                                                                <div>{course.courseTitle}</div>
+                                                        </div>
+                                                        <div>
+                                                                {originalList[0] === undefined || originalList[1] === undefined ? null : 
+                                                                        onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? <div className={styles.explanation}>
+                                                                                                                                        {course.requirements}
+                                                                                                                                </div>: null }
+                                                        </div>
                                                 </div>
                                         ))}
                                 </div>

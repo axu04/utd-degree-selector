@@ -1,10 +1,6 @@
 .choosingWrapper {
         display: grid;
         grid-template-columns: repeat(16, 1fr);
-        /*
-        If you want to change the way the columns are aligned then switch
-        the 16 to an 18 and make the button go in column 17
-        */
         grid-auto-rows: repeat(5, 1fr);
         height: 90vh;
         row-gap: 0vh;

@@ -10,6 +10,7 @@
         position: sticky;
         top: 0;
         background-color: white;
+        z-index: 4;
 }
 
 .dndGroup {
@@ -56,6 +57,8 @@
         margin-left: 3%;
         border-radius: 4px;
         padding: 2%;
+        z-index: 2;
+        position: relative;
 }
 
 .dndItem:hover {
@@ -69,8 +72,8 @@
 .courseFilter {
         text-align: center;
         position: sticky;
-        top: 7.5%;
-        margin-top: -0.5%;
+        top: 8%;
+        margin-bottom: 1%;
         background-color: white;
         font-family: Ubuntu, serif;
         outline-color: green;
@@ -79,6 +82,7 @@
         border: 1px solid;
         border-radius: 4px;
         width: 65%;
+        z-index: 3;
 }
 
 .courseFilter:hover {
@@ -96,4 +100,34 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
         border-color: rgba(229, 103, 23, 0.8);
         box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
         outline: 0 none;
-    }
+}
+
+.explanation {
+        background-color: white;
+        text-align: center;
+        font-size: 0.75vw;
+        border: 1.5px solid;
+        margin-top: -2%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 80%;
+        margin-left: 8%;
+        margin-bottom: 1%;
+        border-radius: 4px;
+        padding: 2%;
+        z-index: 1;
+        animation-duration: 0.7s;
+        animation-name: description;
+}
+
+@keyframes description {
+        from {
+                margin-top: -10%;
+                display: none;
+                
+        }
+
+        to {
+                margin-top: -2%;
+        }
+}
