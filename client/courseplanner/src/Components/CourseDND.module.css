@@ -5,7 +5,7 @@
 .coursesHeader {
         font-family: Ubuntu, serif;
         text-align: center;
-        font-size: 1.5vw;
+        font-size: 1.45vw;
         padding-top: 3%;
         position: sticky;
         top: 0;
@@ -26,6 +26,21 @@
         padding-bottom: 1%;
         text-align: center;
 }
+
+.dndGroup2 {
+        background-color: white;
+        width: 50%;
+        max-height: 84vh;
+        min-height: 84vh;
+        border: 3px solid;
+        overflow: scroll;
+        margin: 1%;
+        margin-top: 0%;
+        font-family: Ubuntu, serif;
+        padding-bottom: 1%;
+        text-align: center;
+}
+
 
 .currentItem {
         background-color: white;
@@ -117,7 +132,7 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
         border-radius: 4px;
         padding: 2%;
         z-index: 1;
-        animation-duration: 0.7s;
+        animation-duration: 0.3s;
         animation-name: description;
 }
 

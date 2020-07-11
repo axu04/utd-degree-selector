@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import styles from './CourseDND.module.css'
 import apis from '../api/api'
 import NextButton from './NextButton'
+import { animateScroll } from 'react-scroll'
 
 function CourseDND() {
         const [list, setList] = useState([])
@@ -37,6 +38,17 @@ function CourseDND() {
                 resetTempList()
                 
         }, [searchValue])
+
+        useEffect(() => {
+                resetTempList()
+                scrollToBottom()
+        }, [list])
+
+        const scrollToBottom = () => {
+                animateScroll.scrollToBottom({
+                        containerId: 1
+                })
+        }
 
         const resetTempList = () => {
                 if (tempList[0] !== undefined) {
@@ -87,27 +99,20 @@ function CourseDND() {
                                 dragItem.current = params
                                 return newList
                         })
-                        setTempList((oldList) => {
-                                let newList = JSON.parse(JSON.stringify(oldList))
-                                newList[params.arrayIndex].courses.splice(params.itemIndex, 0, newList[currentItem.arrayIndex].courses.splice(currentItem.itemIndex, 1)[0])
-                                dragItem.current = params
-                                return newList
-                        })
                 }
         }
 
-        const handleDragEnd = (e) => {
+        const handleDragEnd = (e, params) => {
                 setDragging(false)
                 dragItem.current = null
-                dragNode.current.removeEventListener('dragend', handleDragEnd)
                 dragNode.current = null
                 e.preventDefault()
+                resetTempList()
                 setList(oldList => {
                         let newList = JSON.parse(JSON.stringify(oldList))
                         newList[0].courses.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
                         return newList
                 })
-                resetTempList()
         }
 
         const dragOver = e => {
@@ -120,6 +125,13 @@ function CourseDND() {
                         return styles.currentItem
                 }
                 return styles.dndItem
+        }
+
+        const getContainerStyles = (params) => {
+                if (params.typeList.title === 'Available Courses') {
+                        return styles.dndGroup
+                }
+                return styles.dndGroup2
         }
 
         const updateFilter = (e) => {
@@ -155,6 +167,7 @@ function CourseDND() {
                         return course.courseLabel.indexOf(searchValue.toUpperCase()) !== -1 }
                 )},{ title: 'Selected Courses', courses: list[1].courses }]
         }
+
         var courseNameArray = []
         if (originalList[0] !== undefined) {
                 for (let i = 0; i < originalList[0].courses.length; i++) {
@@ -167,10 +180,11 @@ function CourseDND() {
                                 {selectedCourses.map((typeList, arrayIndex) => (
                                         <div 
                                                 key={arrayIndex} 
-                                                className={styles.dndGroup} 
+                                                id={arrayIndex}
+                                                className={getContainerStyles({typeList})} 
                                                 onDragEnter={dragging && !typeList.courses.length ? e => handleDragEnter(e, {arrayIndex, itemIndex: 0, onDiv: 'first', typeList}) : 
                                                                 dragging ? e => handleDragEnter(e, {arrayIndex, itemIndex: typeList.courses.length-1, typeList}) : null }
-                                                onDragEnd={e => e.preventDefault()}
+                                                onDragEnd={e => handleDragEnd(e)}
                                                 onDragOver={dragOver}
                                                 onDrop={e => e.preventDefault()}
                                         >
@@ -191,7 +205,7 @@ function CourseDND() {
                                                                 onDragStart={ e => {handleDragStart(e, {arrayIndex, itemIndex})}}
                                                                 onDragEnter={dragging ? (e) => {handleDragEnter(e, {arrayIndex, itemIndex, onDiv: 'onDiv', typeList})} : null}
                                                                 className={dragging ? getStyles({arrayIndex, itemIndex, typeList}) : styles.dndItem } 
-                                                                onDragEnd={e => e.preventDefault()}
+                                                                onDragEnd={e => handleDragEnd(e)}
                                                                 onClick={e => changeOnClickState(e, {arrayIndex, itemIndex})}
                                                         >
                                                                 <div>{course.courseLabel}</div>
