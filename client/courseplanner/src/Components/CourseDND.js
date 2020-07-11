@@ -123,6 +123,7 @@ function CourseDND() {
         }
 
         const updateFilter = (e) => {
+                e.target.value = e.target.value.toUpperCase()
                 setSearchValue(e.target.value)
         }
 
