@@ -2,13 +2,14 @@ import React, { useEffect, useState, useRef } from 'react'
 import styles from './CourseDND.module.css'
 import apis from '../api/api'
 import NextButton from './NextButton'
+import BackButton from './BackButton'
+import HowToText from './HowToText'
 import { animateScroll } from 'react-scroll'
 
 function CourseDND() {
         const [list, setList] = useState([])
         const [tempList, setTempList] = useState([])
         const [originalList, setOriginalList] = useState([])
-        const [courseNames, setCourseNames] = useState([])
         const [dragging, setDragging] = useState(false)
         const [searchValue, setSearchValue] = useState('')
         const [onClickArray, setOnClickArray] = useState([])
@@ -41,7 +42,11 @@ function CourseDND() {
 
         useEffect(() => {
                 resetTempList()
-                scrollToBottom()
+                if (dragItem.current !== undefined && dragItem.current !== null) {
+                        if (dragItem.current.arrayIndex === 1) {
+                                scrollToBottom()
+                        }
+                }
         }, [list])
 
         const scrollToBottom = () => {
@@ -99,7 +104,7 @@ function CourseDND() {
                                 dragItem.current = params
                                 return newList
                         })
-                }
+                }  
         }
 
         const handleDragEnd = (e, params) => {
@@ -125,13 +130,6 @@ function CourseDND() {
                         return styles.currentItem
                 }
                 return styles.dndItem
-        }
-
-        const getContainerStyles = (params) => {
-                if (params.typeList.title === 'Available Courses') {
-                        return styles.dndGroup
-                }
-                return styles.dndGroup2
         }
 
         const updateFilter = (e) => {
@@ -181,10 +179,10 @@ function CourseDND() {
                                         <div 
                                                 key={arrayIndex} 
                                                 id={arrayIndex}
-                                                className={getContainerStyles({typeList})} 
+                                                className={styles.dndGroup} 
                                                 onDragEnter={dragging && !typeList.courses.length ? e => handleDragEnter(e, {arrayIndex, itemIndex: 0, onDiv: 'first', typeList}) : 
                                                                 dragging ? e => handleDragEnter(e, {arrayIndex, itemIndex: typeList.courses.length-1, typeList}) : null }
-                                                onDragEnd={e => handleDragEnd(e)}
+                                                onDragEnd={e => handleDragEnd(e, {arrayIndex})}
                                                 onDragOver={dragOver}
                                                 onDrop={e => e.preventDefault()}
                                         >
@@ -198,6 +196,7 @@ function CourseDND() {
                                                                                                 onChange={e => updateFilter(e)}
                                                                                                 >
                                                 </input> : null}
+                                                {typeList.title === 'Selected Courses' && typeList.courses.length === 0 ? <HowToText /> : null}
                                         {typeList.courses.map((course, itemIndex) => (
                                                 <div key={itemIndex} >
                                                         <div 
@@ -213,17 +212,19 @@ function CourseDND() {
                                                         </div>
                                                         <div>
                                                                 {originalList[0] === undefined || originalList[1] === undefined ? null : 
-                                                                        onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? <div className={styles.explanation}>
+                                                                        onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? 
+                                                                                                                                <div className={styles.explanation}>
                                                                                                                                         {course.requirements}
-                                                                                                                                </div>: null }
+                                                                                                                                </div> : null }
                                                         </div>
                                                 </div>
                                         ))}
+                                        <div></div>
                                 </div>
                                 ))}
-
                         </div>
-                        <NextButton selectedCourses={selectedCourses}/>
+                                <BackButton />
+                                <NextButton selectedCourses={selectedCourses}/>
                 </div>)
 }
 

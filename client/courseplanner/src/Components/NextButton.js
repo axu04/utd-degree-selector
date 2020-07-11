@@ -10,7 +10,7 @@ function NextButton(props) {
                         }}}>
                 
                         <button className={styles.selectionFinish}>
-                                Next Steps  >
+                                Next Steps &#62;
                         </button>
                 </Link>)
 }

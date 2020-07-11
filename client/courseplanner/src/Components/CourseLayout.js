@@ -3,8 +3,11 @@ import './CourseLayout.css'
 
 function CourseLayout(data) {
         const [list, setList] = useState([])
-
         const [dragging, setDragging] = useState(false)
+        const [originalList, setOriginalList] = useState([])
+        const [onClickArray, setOnClickArray] = useState([])
+        const [courseNameArray, setCourseNameArray] = useState([])
+
 
         const dragItem = useRef()
         const dragNode = useRef()
@@ -24,8 +27,20 @@ function CourseLayout(data) {
                         {title: 'Third Year Fall', stylingName: 'semester7Wrapper', courses: []},
                         {title: 'Third Year Spring', stylingName: 'semester8Wrapper', courses: []},
                         {title: 'Fourth Year Fall', stylingName: 'semester10Wrapper', courses: []},
-                        {title: 'Fourth Year Spring', stylingName: 'semester11Wrapper', courses: []}
-        ])}, [])
+                        {title: 'Fourth Year Spring', stylingName: 'semester11Wrapper', courses: []} ])
+                setOriginalList(courses)
+                var tempArray = []
+                for (let i = 0; i < courses.length; i++) {
+                        tempArray.push(false)
+                }
+                setOnClickArray(tempArray)
+
+                var courseNameArrayTemp = []
+                for (let i = 0; i < courses.length; i++) {
+                        courseNameArrayTemp.push(courses[i].courseLabel)
+                }
+                setCourseNameArray(courseNameArrayTemp)
+        }, [])
 
         const handleDragStart = (e, params) => {
                 const target = e.target
@@ -80,6 +95,19 @@ function CourseLayout(data) {
                 return 'selectedCourse'
         }
 
+        const changeOnClickState = (e, params) => {
+                if (dragging) {
+                        return
+                }
+                setOnClickArray(oldArray => {
+                        let newArray = [...oldArray]
+                        newArray[courseNameArray.indexOf(list[params.semesterIndex].courses[params.itemIndex].courseLabel)] = !newArray[courseNameArray.indexOf(list[params.semesterIndex].courses[params.itemIndex].courseLabel)]
+                        console.log(newArray)
+                        return newArray
+                })
+                
+        }
+
         const listsForEachSem = list
                 
         return (<div className='choosingWrapper'>
@@ -95,18 +123,22 @@ function CourseLayout(data) {
                                 >
                                        <div className='selectedHeader'>{semester.title} <hr /></div>
                                        {semester.courses.map((course, itemIndex) => (
-                                               <div 
-                                                        draggable
-                                                        onDragStart={ e => {handleDragStart(e, {semesterIndex, itemIndex})}}
-                                                        onDragEnter={dragging ? (e) => {handleDragEnter(e, {semesterIndex, itemIndex, onDiv: 'onDiv'})} : null}
-                                                        className={dragging ? getStyles({semesterIndex, itemIndex, semester}) : 'selectedCourse' } 
-                                                        onDragEnd={e => e.preventDefault()}
-                                                        key={itemIndex}
+                                               <div key={itemIndex}>
+                                                        <div 
+                                                                        draggable
+                                                                        onDragStart={ e => {handleDragStart(e, {semesterIndex, itemIndex})}}
+                                                                        onDragEnter={dragging ? (e) => {handleDragEnter(e, {semesterIndex, itemIndex, onDiv: 'onDiv'})} : null}
+                                                                        className={dragging ? getStyles({semesterIndex, itemIndex, semester}) : 'selectedCourse' } 
+                                                                        onDragEnd={e => e.preventDefault()}
+                                                                        onClick={e => changeOnClickState(e, {semesterIndex, itemIndex})}
 
-                                                >
-                                                       <div>{course.courseLabel}</div>
-                                                       <div>{course.courseTitle}</div>
+                                                                >
+                                                                <div>{course.courseLabel}</div>
+                                                                <div>{course.courseTitle}</div>
+                                                        </div>
+                                                        {onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? <div className="explanation">{course.requirements}</div> : null }
                                                </div>
+                                               
                                        ))}
                                </div>
                        ))}     
