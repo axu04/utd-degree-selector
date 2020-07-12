@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { animateScroll } from 'react-scroll'
 import './CourseLayout.css'
 
 function CourseLayout(data) {
@@ -41,6 +42,20 @@ function CourseLayout(data) {
                 }
                 setCourseNameArray(courseNameArrayTemp)
         }, [])
+
+        useEffect(() => {
+                if (dragItem.current !== undefined && dragItem.current !== null) {
+                        if (dragItem.current.semesterIndex !== 0) {
+                                scrollToBottom()
+                        }
+                }
+        }, [list])
+
+        const scrollToBottom = () => {
+                animateScroll.scrollToBottom({
+                        containerId: dragItem.current.semesterIndex
+                })
+        }
 
         const handleDragStart = (e, params) => {
                 const target = e.target
@@ -114,6 +129,7 @@ function CourseLayout(data) {
                        {listsForEachSem.map((semester, semesterIndex) => (
                                <div 
                                         key={semesterIndex}
+                                        id={semesterIndex}
                                         className={semester.stylingName}
                                         onDragEnter={dragging && !semester.courses.length ? e => handleDragEnter(e, {semesterIndex, itemIndex: 0, onDiv: 'first'}) :
                                                         dragging ? e => handleDragEnter(e, {semesterIndex, itemIndex: semester.courses.length-1, semester}) : null}
@@ -140,6 +156,7 @@ function CourseLayout(data) {
                                                </div>
                                                
                                        ))}
+                                       <div></div>
                                </div>
                        ))}     
                 </div>)

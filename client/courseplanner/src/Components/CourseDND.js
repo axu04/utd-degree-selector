@@ -6,13 +6,15 @@ import BackButton from './BackButton'
 import HowToText from './HowToText'
 import { animateScroll } from 'react-scroll'
 
-function CourseDND() {
+function CourseDND(props) {
         const [list, setList] = useState([])
         const [tempList, setTempList] = useState([])
         const [originalList, setOriginalList] = useState([])
         const [dragging, setDragging] = useState(false)
         const [searchValue, setSearchValue] = useState('')
         const [onClickArray, setOnClickArray] = useState([])
+
+        const [message, setMessage] = useState('> More Resources')
 
         const dragItem = useRef()
         const dragNode = useRef()
@@ -222,8 +224,9 @@ function CourseDND() {
                                         <div></div>
                                 </div>
                                 ))}
-                        </div>
-                                <BackButton />
+                        </div> 
+                                <button className={styles.moreResources} onClick={props.changeMessage}>{message}</button>
+                                <BackButton link={'/degreeSelector'}/>
                                 <NextButton selectedCourses={selectedCourses}/>
                 </div>)
 }
