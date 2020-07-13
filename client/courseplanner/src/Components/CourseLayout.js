@@ -117,10 +117,25 @@ function CourseLayout(data) {
                 setOnClickArray(oldArray => {
                         let newArray = [...oldArray]
                         newArray[courseNameArray.indexOf(list[params.semesterIndex].courses[params.itemIndex].courseLabel)] = !newArray[courseNameArray.indexOf(list[params.semesterIndex].courses[params.itemIndex].courseLabel)]
-                        console.log(newArray)
                         return newArray
                 })
                 
+        }
+
+        const calculateHours = params => {
+                if (params.semester.courses.length === 0) {
+                        return 0;
+                }
+                const courses = params.semester.courses
+                var sum = 0;
+                for (let i = 0; i < courses.length; i++) {
+                        sum += parseInt(courses[i].semesterHours.substring(1,2))
+                }
+                return sum
+        }
+
+        const showHours = params => {
+                return params.course.semesterHours.substring(1,params.course.semesterHours.length-1)
         }
 
         const listsForEachSem = list
@@ -137,7 +152,7 @@ function CourseLayout(data) {
                                         onDragOver={dragOver}
                                         onDrop={e => e.preventDefault()}
                                 >
-                                       <div className='selectedHeader'>{semester.title} <hr /></div>
+                                       <div className='selectedHeader'>{semester.title} <div className={"hours"}>Total Hours: {calculateHours({semester})}</div> <hr /></div>
                                        {semester.courses.map((course, itemIndex) => (
                                                <div key={itemIndex}>
                                                         <div 
@@ -152,10 +167,18 @@ function CourseLayout(data) {
                                                                 <div>{course.courseLabel}</div>
                                                                 <div>{course.courseTitle}</div>
                                                         </div>
-                                                        {onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? <div className="explanation">{course.requirements}</div> : null }
+                                                        {onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? <div className="explanation">
+                                                                                                                                        <b><div className="requirementsTextDesc">Requirements</div></b> 
+                                                                                                                                        <div>-----------------------</div>
+                                                                                                                                        {course.requirements}
+                                                                                                                                        <b><div className="hoursTextDesc">Hours</div></b>
+                                                                                                                                        <div>---------</div>
+                                                                                                                                        {showHours({course})}
+                                                                                                                                </div> : null }
                                                </div>
                                                
                                        ))}
+                                       
                                        <div></div>
                                </div>
                        ))}     

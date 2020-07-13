@@ -13,7 +13,7 @@
         padding-bottom: 2%;
         grid-column: 1 / 5;
         grid-row: 1 / 6;
-        margin: 2%;
+        margin: 1.7%;
         text-align: center;
 
 }
@@ -204,7 +204,7 @@
         background-color: white;
         font-family: Ubuntu, serif;
         text-align: center;
-        font-size: 0.75vw;
+        font-size: 0.65vw;
         border: 1.5px solid;
         margin-top: -2%;
         padding-top: 1%;
@@ -229,4 +229,20 @@
         to {
                 margin-top: -2%;
         }
+}
+
+.hours {
+        font-family: Ubuntu, serif;
+        font-size: 0.75vw;
+}
+
+.requirementsTextDesc {
+        margin-bottom: -1%;
+        font-size: 0.75vw;
+}
+
+.hoursTextDesc {
+        margin-top: 1%;
+        font-size: 0.75vw;
+        margin-bottom: -1%;
 }

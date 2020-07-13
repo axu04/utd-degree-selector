@@ -160,6 +160,10 @@ function CourseDND(props) {
                         return newArray
                 })
         }
+
+        const showHours = params => {
+                return params.course.semesterHours.substring(1,params.course.semesterHours.length-1)
+        }
         
         var selectedCourses = []
         if (tempList[0] !== undefined) {
@@ -216,7 +220,12 @@ function CourseDND(props) {
                                                                 {originalList[0] === undefined || originalList[1] === undefined ? null : 
                                                                         onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? 
                                                                                                                                 <div className={styles.explanation}>
+                                                                                                                                        <b><div className={styles.requirementsText}>Requirements </div></b> 
+                                                                                                                                        <div>-----------------------</div>
                                                                                                                                         {course.requirements}
+                                                                                                                                        <b><div className={styles.hoursText}>Hours</div></b>
+                                                                                                                                        <div>---------</div>
+                                                                                                                                        {showHours({course})}
                                                                                                                                 </div> : null }
                                                         </div>
                                                 </div>
@@ -225,7 +234,7 @@ function CourseDND(props) {
                                 </div>
                                 ))}
                         </div> 
-                                <button className={styles.moreResources} onClick={props.changeMessage}>{message}</button>
+                                <button className={styles.moreResources} onClick={props.changeMessage}><div className={styles.buttonText}>{message}</div></button>
                                 <BackButton link={'/degreeSelector'}/>
                                 <NextButton selectedCourses={selectedCourses}/>
                 </div>)
