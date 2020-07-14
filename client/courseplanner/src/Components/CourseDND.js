@@ -5,7 +5,6 @@ import NextButton from './NextButton'
 import BackButton from './BackButton'
 import HowToText from './HowToText'
 import { animateScroll } from 'react-scroll'
-import { reactLocalStorage } from 'reactjs-localstorage'
 
 function CourseDND(props) {
         const [list, setList] = useState([])
@@ -25,7 +24,7 @@ function CourseDND(props) {
                         var courseData = await apis.getAllCourses()
                         var classes = courseData.data
                         classes.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
-                        const getLocalStorage = reactLocalStorage.getObject('DndMainItem')
+                        const getLocalStorage = JSON.parse(localStorage.getItem('DndMainItem'))
                         if (getLocalStorage !== undefined) {
                                 setList(getLocalStorage)
                         } else {
@@ -109,7 +108,7 @@ function CourseDND(props) {
                         setList((oldList) => {
                                 let newList = JSON.parse(JSON.stringify(oldList))
                                 newList[params.arrayIndex].courses.splice(params.itemIndex, 0, newList[currentItem.arrayIndex].courses.splice(newCurrentItem, 1)[0])
-                                reactLocalStorage.setObject('DndMainItem', newList)
+                                localStorage.setItem('DndMainItem', newList)
                                 dragItem.current = params
                                 return newList
                         })
@@ -125,7 +124,7 @@ function CourseDND(props) {
                 setList(oldList => {
                         let newList = JSON.parse(JSON.stringify(oldList))
                         newList[0].courses.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
-                        reactLocalStorage.setObject('DndMainItem', newList)
+                        localStorage.setItem('DndMainItem', JSON.stringify(newList))
                         return newList
                 })
         }
@@ -176,7 +175,7 @@ function CourseDND(props) {
         const deleteSelected = params => {
                 setList(oldList => {
                         var newList = JSON.parse(JSON.stringify(originalList))
-                        reactLocalStorage.setObject('DndMainItem', newList)
+                        localStorage.setItem('DndMainItem', JSON.stringify(newList))
                         return newList
                 })
         }
