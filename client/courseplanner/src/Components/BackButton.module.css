@@ -2,7 +2,7 @@
         font-family: Ubuntu, serif;
         background-color: transparent;
         border: 2px solid;
-        margin-left: 35.6%;
+        margin-left: 31.5%;
         padding: 2%;
         padding-left: 5%;
         padding-right: 5%;
@@ -11,12 +11,11 @@
         outline: none;
         height: 6vh;
         transition: 0.15s;
-    }
+}
     
-    .selectionFinish:hover {
-
+.selectionFinish:hover {
         border-color: rgba(229, 103, 23, 0.8);
         box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
         outline: 0 none;
         color: rgba(235, 120, 49, 0.8);
-    }
+}

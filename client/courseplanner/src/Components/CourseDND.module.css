@@ -144,9 +144,9 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
         font-family: Ubuntu, serif;
         background-color: white;
         border: none;
-        font-size: 0.75vw;
+        font-size: 1vw; /* Originally 0.75vw */
         padding: 2%;
-        margin-left: -1%;
+        margin-left: -0.75%; /*Originally -1% */
         outline: none;
         position: relative;
         transition: 0.5s;
@@ -170,4 +170,29 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
         margin-top: 1%;
         font-size: 0.75vw;
         margin-bottom: -1%;
+}
+
+.deleteButton {
+        text-align: center;
+        position: sticky;
+        top: 8%;
+        margin-bottom: 1%;
+        background-color: white;
+        font-family: Ubuntu, serif;
+        transition-property: outline-color;
+        background-color: white;
+        border: 1px solid;
+        border-radius: 4px;
+        width: 65%;
+        font-size: 0.75vw;
+        z-index: 3;
+        outline: none;
+}
+
+.deleteButton:hover {
+        border-color: red;
+        box-shadow: 0 1px 1px rgba(233, 33, 33, 0.075) inset, 0 0 8px rgba(233, 33, 33, 0.6);
+        outline: 0 none;
+        color: red;
+        transition: 0.15s;
 }

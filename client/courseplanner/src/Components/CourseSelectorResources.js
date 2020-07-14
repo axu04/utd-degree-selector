@@ -61,6 +61,9 @@ function CourseSelectorResources() {
                         <div className={styles.disclaimerSmall}>
                                 Not all courses are offered through Study Abroad, so check what is available when planning.
                         </div>
+                        <div className={styles.disclaimerSmall}>
+                                Classes with variable hours are only counted as a single hour in the degree planner. Look at the course information in the UTD course list or talk to an advisor to determine the number of hours.
+                        </div>
          </div>)
 }
 
