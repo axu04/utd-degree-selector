@@ -26,7 +26,7 @@ function CourseDND(props) {
                         var classes = courseData.data
                         classes.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
                         const getLocalStorage = reactLocalStorage.getObject('DndMainItem')
-                        if (getLocalStorage !== "undefined" || getLocalStorage !== "null") {
+                        if (getLocalStorage !== undefined) {
                                 setList(getLocalStorage)
                         } else {
                                 setList([ { title: 'Available Courses', courses: classes },{ title: 'Selected Courses', courses: [] }])
