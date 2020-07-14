@@ -182,7 +182,7 @@ function CourseDND(props) {
         }
         
         var selectedCourses = []
-        if (tempList[0] !== undefined) {
+        if (tempList[0] !== undefined && list[0] !== undefined) {
                 selectedCourses = [ { title: 'Available Courses', courses: list[0].courses.filter((course) => { 
                         return course.courseLabel.indexOf(searchValue.toUpperCase()) !== -1 }
                 )},{ title: 'Selected Courses', courses: list[1].courses }]
