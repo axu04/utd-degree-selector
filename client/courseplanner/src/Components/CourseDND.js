@@ -26,7 +26,7 @@ function CourseDND(props) {
                         var classes = courseData.data
                         classes.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
                         const getLocalStorage = reactLocalStorage.getObject('DndMainItem')
-                        if (getLocalStorage !== "undefined") {
+                        if (getLocalStorage !== "undefined" || getLocalStorage !== "null") {
                                 setList(getLocalStorage)
                         } else {
                                 setList([ { title: 'Available Courses', courses: classes },{ title: 'Selected Courses', courses: [] }])
@@ -182,7 +182,7 @@ function CourseDND(props) {
         }
         
         var selectedCourses = []
-        if (tempList[0] !== undefined && list[0] !== undefined) {
+        if (tempList[0] !== undefined) {
                 selectedCourses = [ { title: 'Available Courses', courses: list[0].courses.filter((course) => { 
                         return course.courseLabel.indexOf(searchValue.toUpperCase()) !== -1 }
                 )},{ title: 'Selected Courses', courses: list[1].courses }]
