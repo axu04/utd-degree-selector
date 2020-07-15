@@ -8,7 +8,7 @@
 
 .selectedWrapper {
         border: 2px solid;
-        height: 95vh;
+        height: 83.55vh;
         overflow: scroll;
         padding-bottom: 2%;
         grid-column: 1 / 5;
@@ -246,3 +246,64 @@
         font-size: 0.75vw;
         margin-bottom: -1%;
 }
+
+.buttonsWrapper {
+        display: flex;
+}
+
+.ContinueForwardDiv { 
+        height: 10vh;
+        padding-bottom: 1%;
+        grid-column: 14 / 16;
+        grid-row: 5;
+        font-family: Ubuntu, serif;
+        font-size: 1.25vw;
+        background-color: transparent;
+        padding: 0.3em 0.3em;
+        -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ContinuingForward {
+        border: solid 2px;
+        float: left;
+        padding: 10px 0;
+        background-color: white;
+        text-align: center;
+        transition-property: background;
+        transition-duration: 1s;
+        transition-timing-function: linear;
+        width: 16vw;
+        border-radius: 4px;
+        outline: none;
+}
+
+.goBackwardsDiv {
+        height: 10vh;
+        padding-bottom: 1%;
+        grid-column: 14 / 16;
+        grid-row: 5;
+        font-family: Ubuntu, serif;
+        font-size: 1.25vw;
+        background-color: transparent;
+        padding: 0.3em 0.3em;
+        -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        margin-left: 65%;
+}
+
+.goBackwards {
+        border: solid 2px;
+        float: left;
+        padding: 10px 0;
+        background-color: white;
+        text-align: center;
+        transition-property: background;
+        transition-duration: 1s;
+        transition-timing-function: linear;
+        width: 16vw;
+        border-radius: 4px;
+        outline: none;
+}
+
+.html2canvas-container { width: 100% !important; height: 100% !important; }

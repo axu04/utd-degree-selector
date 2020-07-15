@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { animateScroll } from 'react-scroll'
 import './CourseLayout.css'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
+import ExportCSV from './ExportCSV'
 
 function CourseLayout(data) {
         const [list, setList] = useState([])
         const [dragging, setDragging] = useState(false)
-        const [originalList, setOriginalList] = useState([])
         const [onClickArray, setOnClickArray] = useState([])
         const [courseNameArray, setCourseNameArray] = useState([])
 
@@ -15,7 +17,10 @@ function CourseLayout(data) {
 
         useEffect(() => {
                 var courses = []
-                if (data.location.myProps === undefined) {
+                const getLocalStorage = JSON.parse(localStorage.getItem('DndMainItem'))
+                if (getLocalStorage !== undefined && getLocalStorage !== null){
+                        courses = getLocalStorage[1].courses
+                } else if (data.location.myProps === undefined) {
                         courses = []
                 } else {
                         courses = data.location.myProps.listing[1].courses
@@ -29,7 +34,6 @@ function CourseLayout(data) {
                         {title: 'Third Year Spring', stylingName: 'semester8Wrapper', courses: []},
                         {title: 'Fourth Year Fall', stylingName: 'semester10Wrapper', courses: []},
                         {title: 'Fourth Year Spring', stylingName: 'semester11Wrapper', courses: []} ])
-                setOriginalList(courses)
                 var tempArray = []
                 for (let i = 0; i < courses.length; i++) {
                         tempArray.push(false)
@@ -138,50 +142,77 @@ function CourseLayout(data) {
                 return params.course.semesterHours.substring(1,params.course.semesterHours.length-1)
         }
 
+        const exportPDF = () => {
+                const input = document.querySelector("#semesters")
+                html2canvas(input).then((canvas) => {
+                        const imgData = canvas.toDataURL('image/png')
+                        const pdf = new jsPDF({
+                                orientation: 'landscape',
+                        })
+                        const imgProps= pdf.getImageProperties(imgData)
+                        const pdfWidth = pdf.internal.pageSize.getWidth()
+                        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+                        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, 200)
+                        pdf.save('download.pdf')
+                })
+        }
+
         const listsForEachSem = list
                 
-        return (<div className='choosingWrapper'>
-                       {listsForEachSem.map((semester, semesterIndex) => (
-                               <div 
-                                        key={semesterIndex}
-                                        id={semesterIndex}
-                                        className={semester.stylingName}
-                                        onDragEnter={dragging && !semester.courses.length ? e => handleDragEnter(e, {semesterIndex, itemIndex: 0, onDiv: 'first'}) :
-                                                        dragging ? e => handleDragEnter(e, {semesterIndex, itemIndex: semester.courses.length-1, semester}) : null}
-                                        onDragEnd={e => e.preventDefault()}
-                                        onDragOver={dragOver}
-                                        onDrop={e => e.preventDefault()}
-                                >
-                                       <div className='selectedHeader'>{semester.title} <div className={"hours"}>Total Hours: {calculateHours({semester})}</div> <hr /></div>
-                                       {semester.courses.map((course, itemIndex) => (
-                                               <div key={itemIndex}>
-                                                        <div 
-                                                                        draggable
-                                                                        onDragStart={ e => {handleDragStart(e, {semesterIndex, itemIndex})}}
-                                                                        onDragEnter={dragging ? (e) => {handleDragEnter(e, {semesterIndex, itemIndex, onDiv: 'onDiv'})} : null}
-                                                                        className={dragging ? getStyles({semesterIndex, itemIndex, semester}) : 'selectedCourse' } 
-                                                                        onDragEnd={e => e.preventDefault()}
-                                                                        onClick={e => changeOnClickState(e, {semesterIndex, itemIndex})}
+        return (<div>
+                        <div className='choosingWrapper' id='semesters'>
+                                {listsForEachSem.map((semester, semesterIndex) => (
+                                        <div 
+                                                        key={semesterIndex}
+                                                        id={semesterIndex}
+                                                        className={semester.stylingName}
+                                                        onDragEnter={dragging && !semester.courses.length ? e => handleDragEnter(e, {semesterIndex, itemIndex: 0, onDiv: 'first'}) :
+                                                                        dragging ? e => handleDragEnter(e, {semesterIndex, itemIndex: semester.courses.length-1, semester}) : null}
+                                                        onDragEnd={e => e.preventDefault()}
+                                                        onDragOver={dragOver}
+                                                        onDrop={e => e.preventDefault()}
+                                                >
+                                                <div className='selectedHeader'>{semester.title} <div className={"hours"}>Total Hours: {calculateHours({semester})}</div> <hr /></div>
+                                                {semester.courses.map((course, itemIndex) => (
+                                                        <div key={itemIndex}>
+                                                                        <div 
+                                                                                        draggable
+                                                                                        onDragStart={ e => {handleDragStart(e, {semesterIndex, itemIndex})}}
+                                                                                        onDragEnter={dragging ? (e) => {handleDragEnter(e, {semesterIndex, itemIndex, onDiv: 'onDiv'})} : null}
+                                                                                        className={dragging ? getStyles({semesterIndex, itemIndex, semester}) : 'selectedCourse' } 
+                                                                                        onDragEnd={e => e.preventDefault()}
+                                                                                        onClick={e => changeOnClickState(e, {semesterIndex, itemIndex})}
 
-                                                                >
-                                                                <div>{course.courseLabel}</div>
-                                                                <div>{course.courseTitle}</div>
+                                                                                >
+                                                                                <div>{course.courseLabel}</div>
+                                                                                <div>{course.courseTitle}</div>
+                                                                        </div>
+                                                                        {onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? <div className="explanation">
+                                                                                                                                                        <b><div className="requirementsTextDesc">Requirements</div></b> 
+                                                                                                                                                        <div>-----------------------</div>
+                                                                                                                                                        {course.requirements}
+                                                                                                                                                        <b><div className="hoursTextDesc">Hours</div></b>
+                                                                                                                                                        <div>---------</div>
+                                                                                                                                                        {showHours({course})}
+                                                                                                                                                </div> : null }
                                                         </div>
-                                                        {onClickArray[courseNameArray.indexOf(course.courseLabel)] === true ? <div className="explanation">
-                                                                                                                                        <b><div className="requirementsTextDesc">Requirements</div></b> 
-                                                                                                                                        <div>-----------------------</div>
-                                                                                                                                        {course.requirements}
-                                                                                                                                        <b><div className="hoursTextDesc">Hours</div></b>
-                                                                                                                                        <div>---------</div>
-                                                                                                                                        {showHours({course})}
-                                                                                                                                </div> : null }
-                                               </div>
-                                               
-                                       ))}
-                                       
-                                       <div></div>
-                               </div>
-                       ))}     
+                                                        
+                                                ))}
+                                                
+                                                <div></div>
+                                        </div>
+                                ))}     
+                        </div>
+                        <div className="buttonsWrapper">
+                                <div className="goBackwardsDiv">
+                                        <button className="goBackwards">Reselect Courses</button>
+                                </div>
+                                {/* <ExportCSV data={list}/> */}
+                                <div className="ContinueForwardDiv">
+                                        <button className="ContinuingForward"> Export Your Degree </button>
+                                </div>
+                        </div>
+                       
                 </div>)
 }
 

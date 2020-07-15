@@ -1,0 +1,26 @@
+.ContinueForwardDiv { 
+        height: 10vh;
+        padding-bottom: 1%;
+        grid-column: 14 / 16;
+        grid-row: 5;
+        font-family: Ubuntu, serif;
+        font-size: 1.25vw;
+        background-color: transparent;
+        padding: 0.3em 0.3em;
+        -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ContinuingForward {
+        border: solid 2px;
+        float: left;
+        padding: 10px 0;
+        background-color: white;
+        text-align: center;
+        transition-property: background;
+        transition-duration: 1s;
+        transition-timing-function: linear;
+        width: 16vw;
+        border-radius: 4px;
+        outline: none;
+}
