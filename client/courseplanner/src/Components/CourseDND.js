@@ -23,6 +23,12 @@ function CourseDND(props) {
                 async function getData() {
                         var courseData = await apis.getAllCourses()
                         var classes = courseData.data
+                        for (let i = 0; i < classes.length; i++){
+                                delete classes[i]._id
+                                delete classes[i].__v
+                                delete classes[i].courseTopic
+                                classes[i].space = " "
+                        }
                         classes.sort((a, b) => (a.courseLabel > b.courseLabel) ? 1 : -1)
                         const getLocalStorage = JSON.parse(localStorage.getItem('DndMainItem'))
                         if (getLocalStorage !== undefined && getLocalStorage !== null) {
@@ -193,7 +199,7 @@ function CourseDND(props) {
                         courseNameArray.push(originalList[0].courses[i].courseLabel)
                 }
         }
-
+        console.log(list)
         return (<div>
                         <div className={styles.wrapper}>
                                 {selectedCourses.map((typeList, arrayIndex) => (

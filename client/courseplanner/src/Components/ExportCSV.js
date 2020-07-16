@@ -6,7 +6,6 @@ import ReactTable from 'react-table'
 function ExportCSV(props) {
         const [semesterCourses, setSemesterCourses] = useState([])
         const [downloadData, setDownloadData] = useState([])
-        const [headers, setHeaders] = useState([{label: 'Semester', key: 'Semester'}])
 
         useEffect(() => {
                 setSemesterCourses(props.degreeCourses)
@@ -14,6 +13,8 @@ function ExportCSV(props) {
 
         const handleClick = () => {
                 setDownloadData(toCSV(pivot(semesterCourses)))
+                console.log(toCSV(pivot(semesterCourses)))
+                // console.log(pivot(semesterCourses))
         }
 
         const pivot = (data) => {
@@ -36,14 +37,32 @@ function ExportCSV(props) {
         }
 
         const toCSV = (data) => {
-                return data.map( row => 
-                        row.map ( val => isNaN(val) ? JSON.stringify(val) : +val ).join(',')
-                ).join('\n');
+                var csvData = []
+
+                for (let i = 0; i < data.length; i++) {
+                        for (let j = 0; j < data[i].length; j++) {
+                                if (i === 0) {
+                                        continue
+                                } else if (j === 1) {
+                                        continue
+                                }
+                                csvData.push([])
+                                csvData[csvData.length-1].push(data[i][j])
+                                if (j === 0) {
+                                        csvData.push([])
+                                        csvData[csvData.length-1].push(" ")
+                                }
+                        }
+                }
+                return csvData
+                // return data.map( row => 
+                //         row.map ( val => isNaN(val) ? JSON.stringify(val) : +val ).join(',')
+                // ).join('\n');
+                
         }
-        console.log(downloadData)
         return (<div className={styles.ContinueForwardDiv}>
-                        <button onClick={handleClick} className={styles.ContinuingForward}> Export Your Degree </button>
-                        <CSVLink data={downloadData}>Download Data</CSVLink>
+                        {/* <button onClick={handleClick} > Export Your Degree </button> */}
+                        <CSVLink filename="DegreePlan.csv" className={styles.ContinuingForward} onClick={handleClick} data={downloadData}>Export to Excel (.CSV)</CSVLink>
                 </div>)
 }
 

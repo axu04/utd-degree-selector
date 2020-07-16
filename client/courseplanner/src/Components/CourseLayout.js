@@ -208,9 +208,6 @@ function CourseLayout(data) {
                                         <button className="goBackwards">Reselect Courses</button>
                                 </div>
                                 <ExportCSV degreeCourses={list}/>
-                                {/* <div className="ContinueForwardDiv">
-                                        <button className="ContinuingForward"> Export Your Degree </button>
-                                </div> */}
                         </div>
                        
                 </div>)
