@@ -1,0 +1,28 @@
+.disclaimerWrapper {
+        font-family: Ubuntu, serif;
+        text-align: center;
+        padding-top: 2%;
+        font-size: 2vw;
+}
+
+.disclaimerHead {
+        margin-bottom: 1%;
+}
+
+.disclaimerHead2 {
+        font-size: 1.5vw;
+        padding-top: 1%;
+        margin-bottom: 1%;
+}
+
+.disclaimerPg {
+        font-size: 1vw;
+        padding-bottom: 0.5%;
+}
+
+.disclaimerSmall {
+        font-size: 0.85vw;
+        padding-bottom: 0.5%;
+        padding-left: 10%;
+        padding-right: 10%;
+}

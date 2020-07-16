@@ -6,6 +6,7 @@
         font-size: 1vw;
         background-color: transparent;
         padding: 0.3em 0.3em;
+        padding-left: 1.05%;
         -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -20,7 +21,7 @@
         transition-property: background;
         transition-duration: 1s;
         transition-timing-function: linear;
-        width: 16vw;
+        width: 17vw;
         border-radius: 4px;
         outline: none;
         border-color: black;

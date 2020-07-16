@@ -249,6 +249,7 @@
 
 .buttonsWrapper {
         display: flex;
+        height: 5vh;
 }
 
 .ContinueForwardDiv { 
@@ -273,29 +274,29 @@
         transition-property: background;
         transition-duration: 1s;
         transition-timing-function: linear;
-        width: 16vw;
+        width: 17.5vw;
         border-radius: 4px;
         outline: none;
 }
 
 .goBackwardsDiv {
-        height: 10vh;
+        height: 5vh;
         padding-bottom: 1%;
         grid-column: 14 / 16;
         grid-row: 5;
-        font-family: Ubuntu, serif;
         font-size: 1vw;
         background-color: transparent;
         padding: 0.3em 0.3em;
-        margin-left: 65%;
+        margin-left: 46.5%;
 }
 
 .goBackwards {
+        font-family: Ubuntu, serif;
         float: left;
         padding: 10px 0;
         background-color: white;
         text-align: center;
-        width: 16vw;
+        width: 17.5vw;
         border-radius: 4px;
         outline: none;
         border-color: black;
@@ -309,6 +310,30 @@
         box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
         outline: 0 none;
         color: rgba(235, 120, 49, 0.8);
+}
+
+.infoWrapper {
+        background-color: transparent;
+}
+
+.moreResources {
+        background-color: transparent;
+        font-family: Ubuntu, serif;
+        width: 16vw;
+        text-align: left;
+        border: none;
+        padding-top: 3%;
+        padding-left: 1%;
+        font-size: 1vw;
+        outline: none;
+}
+
+.buttonText {
+        border-bottom: 1px solid transparent;    
+        transition: all .3s ease-in;
+}
+.buttonText:hover{
+        border-bottom: 1px solid black;    
 }
 
 .html2canvas-container { width: 100% !important; height: 100% !important; }

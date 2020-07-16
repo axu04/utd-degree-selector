@@ -14,8 +14,6 @@ function CourseDND(props) {
         const [searchValue, setSearchValue] = useState('')
         const [onClickArray, setOnClickArray] = useState([])
 
-        const [message, setMessage] = useState('> More Resources')
-
         const dragItem = useRef()
         const dragNode = useRef()
 
@@ -229,7 +227,7 @@ function CourseDND(props) {
                                                                                                 value={searchValue}
                                                                                                 onChange={e => updateFilter(e)}
                                                                                                 >
-                                                </input> : <button className={styles.deleteButton} onClick={deleteSelected}>Delete Selected Courses</button>}
+                                                </input> : <button className={styles.deleteButton} onClick={deleteSelected}>Delete All Selected Courses</button>}
                                                 {typeList.title === 'Selected Courses' && typeList.courses.length === 0 ? <HowToText /> : null}
                                         {typeList.courses.map((course, itemIndex) => (
                                                 <div key={itemIndex} >

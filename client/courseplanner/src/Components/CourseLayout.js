@@ -5,7 +5,7 @@ import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import ExportCSV from './ExportCSV'
 import { Link } from 'react-router-dom'
-// import { PropertyDescriptorParsingType } from 'html2canvas/dist/types/css/IPropertyDescriptor'
+import CourseLayoutResources from './CourseLayoutResources'
 
 function CourseLayout(data) {
         const [list, setList] = useState([])
@@ -13,10 +13,16 @@ function CourseLayout(data) {
         const [onClickArray, setOnClickArray] = useState([])
         const [courseNameArray, setCourseNameArray] = useState([])
         const [degree, setDegree] = useState('')
+        const [showingMessage, setShowingMessage] = useState(false)
 
 
         const dragItem = useRef()
         const dragNode = useRef()
+        const element = useRef(null)
+
+        useEffect(() => {
+                element.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
+        })
 
         useEffect(() => {
                 var courses = []
@@ -152,19 +158,19 @@ function CourseLayout(data) {
                 return params.course.semesterHours.substring(1,params.course.semesterHours.length-1)
         }
 
-        const exportPDF = () => {
-                const input = document.querySelector("#semesters")
-                html2canvas(input).then((canvas) => {
-                        const imgData = canvas.toDataURL('image/png')
-                        const pdf = new jsPDF({
-                                orientation: 'landscape',
-                        })
-                        const imgProps= pdf.getImageProperties(imgData)
-                        const pdfWidth = pdf.internal.pageSize.getWidth()
-                        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
-                        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, 200)
-                        pdf.save('download.pdf')
+        const changeMessage = () => {
+                setShowingMessage(oldMessage => {
+                        let newMessage = !oldMessage;
+                        return newMessage
                 })
+        }
+
+        const swapMessage = () => {
+                if (showingMessage === false) {
+                        return <div>&#62; Information and More Resources</div>
+                } else {
+                        return <div>&or; Information and More Resources</div>
+                }
         }
 
         const listsForEachSem = list
@@ -216,6 +222,9 @@ function CourseLayout(data) {
                                 ))}     
                         </div>
                         <div className="buttonsWrapper">
+                                <div className="infoWrapper">
+                                        <button className="moreResources" onClick={changeMessage}><div className="buttonText">{swapMessage()}</div></button>
+                                </div>
                                 <div className="goBackwardsDiv">
                                         <Link to={degree}>
                                                 <button className="goBackwards">&#60; Reselect Courses</button>
@@ -223,7 +232,8 @@ function CourseLayout(data) {
                                 </div>
                                 <ExportCSV degreeCourses={list}/>
                         </div>
-                       
+                        {showingMessage ? <CourseLayoutResources /> : null}
+                        <div id={'element'} ref={element}></div>
                 </div>)
 }
 

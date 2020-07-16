@@ -1,7 +1,7 @@
 .title {
         font-size: 8vw;
         text-align: center;
-        padding-top: 20%;
+        padding-top: 12%;
         font-family: Ubuntu, serif;
 }
 
@@ -54,4 +54,8 @@
         font-family: Ubuntu, serif;
         text-align: center;
         margin-top: 20%
+}
+
+.logo {
+        border-radius: 10px;
 }
