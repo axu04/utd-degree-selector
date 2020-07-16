@@ -12,6 +12,10 @@ export default class Homepage extends React.Component {
                                                 <button className={styles.degreeButton}>Plan Your Degree Now!</button>
                                         </Link>
                                 </Fade>
+                                <Fade bottom>
+                                        <div className={styles.acknowledgements}>Created by Alec Xu and Tanmay Karandikar.</div>
+                                </Fade>
+                                
                         </div>
         }
 }

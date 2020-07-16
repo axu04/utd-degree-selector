@@ -13,8 +13,6 @@ function ExportCSV(props) {
 
         const handleClick = () => {
                 setDownloadData(toCSV(pivot(semesterCourses)))
-                console.log(toCSV(pivot(semesterCourses)))
-                // console.log(pivot(semesterCourses))
         }
 
         const pivot = (data) => {
@@ -55,13 +53,9 @@ function ExportCSV(props) {
                         }
                 }
                 return csvData
-                // return data.map( row => 
-                //         row.map ( val => isNaN(val) ? JSON.stringify(val) : +val ).join(',')
-                // ).join('\n');
                 
         }
         return (<div className={styles.ContinueForwardDiv}>
-                        {/* <button onClick={handleClick} > Export Your Degree </button> */}
                         <CSVLink filename="DegreePlan.csv" className={styles.ContinuingForward} onClick={handleClick} data={downloadData}>Export to Excel (.CSV)</CSVLink>
                 </div>)
 }

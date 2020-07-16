@@ -49,3 +49,9 @@
         color: orange;
         opacity: 1;
 }
+
+.acknowledgements {
+        font-family: Ubuntu, serif;
+        text-align: center;
+        margin-top: 20%
+}

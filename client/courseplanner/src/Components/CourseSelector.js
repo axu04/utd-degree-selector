@@ -23,6 +23,7 @@ function CourseSelector(props) {
         }
         var route = props.location.pathname
         const degreeTitle = route.slice(1, route.length)
+        localStorage.setItem('Degree', degreeTitle)
         return <div>
                         <Fade top>
                                 <div className={styles.title}>{degreeTitle}</div>
@@ -33,7 +34,7 @@ function CourseSelector(props) {
                                 </Fade>
                                 <Fade right>
                                         <div className={styles.courseList}>
-                                                <CourseDND changeMessage={changeMessage}/>
+                                                <CourseDND changeMessage={changeMessage} degreeTitle={degreeTitle} showingMessage={showingMessage}/>
                                         </div>
                                 </Fade>
                                 

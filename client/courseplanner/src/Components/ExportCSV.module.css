@@ -3,7 +3,6 @@
         padding-bottom: 1%;
         grid-column: 14 / 16;
         grid-row: 5;
-        font-family: Ubuntu, serif;
         font-size: 1vw;
         background-color: transparent;
         padding: 0.3em 0.3em;
@@ -12,6 +11,7 @@
 }
 
 .ContinuingForward {
+        font-family: Ubuntu, serif;
         border: solid 2px;
         float: left;
         padding: 10px 0;
@@ -27,4 +27,12 @@
         color: black;
         text-decoration: none;
         font-size: 1vw;
+        transition: 0.15s;
+}
+
+.ContinuingForward:hover {
+        border-color: rgba(229, 103, 23, 0.8);
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+        outline: 0 none;
+        color: rgba(235, 120, 49, 0.8);
 }

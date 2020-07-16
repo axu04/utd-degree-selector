@@ -185,6 +185,14 @@ function CourseDND(props) {
                         return newList
                 })
         }
+
+        const swapMessage = () => {
+                if (props.showingMessage === false) {
+                        return <div>&#62; More Resources</div>
+                } else {
+                        return <div>&or; More Resources</div>
+                }
+        }
         
         var selectedCourses = []
         if (tempList[0] !== undefined) {
@@ -199,7 +207,6 @@ function CourseDND(props) {
                         courseNameArray.push(originalList[0].courses[i].courseLabel)
                 }
         }
-        console.log(list)
         return (<div>
                         <div className={styles.wrapper}>
                                 {selectedCourses.map((typeList, arrayIndex) => (
@@ -255,9 +262,9 @@ function CourseDND(props) {
                                 </div>
                                 ))}
                         </div> 
-                                <button className={styles.moreResources} onClick={props.changeMessage}><div className={styles.buttonText}>{message}</div></button>
+                                <button className={styles.moreResources} onClick={props.changeMessage}><div className={styles.buttonText}>{swapMessage()}</div></button>
                                 <BackButton link={'/degreeSelector'}/>
-                                <NextButton selectedCourses={selectedCourses}/>
+                                <NextButton selectedCourses={selectedCourses} degreeTitle={props.degreeTitle}/>
                 </div>)
 }
 

@@ -4,12 +4,15 @@ import './CourseLayout.css'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import ExportCSV from './ExportCSV'
+import { Link } from 'react-router-dom'
+// import { PropertyDescriptorParsingType } from 'html2canvas/dist/types/css/IPropertyDescriptor'
 
 function CourseLayout(data) {
         const [list, setList] = useState([])
         const [dragging, setDragging] = useState(false)
         const [onClickArray, setOnClickArray] = useState([])
         const [courseNameArray, setCourseNameArray] = useState([])
+        const [degree, setDegree] = useState('')
 
 
         const dragItem = useRef()
@@ -45,6 +48,14 @@ function CourseLayout(data) {
                         courseNameArrayTemp.push(courses[i].courseLabel)
                 }
                 setCourseNameArray(courseNameArrayTemp)
+                var degree = ''
+                const degreeLocalStorage = localStorage.getItem('Degree')
+                if (getLocalStorage !== undefined && getLocalStorage !== null) {
+                        degree = degreeLocalStorage
+                } else {
+                        degree = data.location.myProps.degreeTitle
+                }
+                setDegree(degree)
         }, [])
 
         useEffect(() => {
@@ -75,7 +86,6 @@ function CourseLayout(data) {
         }
 
         const handleDragEnter = (e, params) => {
-                console.log('entered')
                 if (params.onDiv === 'onDiv' || params.semesterIndex === dragItem.current.semesterIndex) {
                         return
                 }
@@ -158,6 +168,8 @@ function CourseLayout(data) {
         }
 
         const listsForEachSem = list
+
+        console.log(data.location.myProps)
                 
         return (<div>
                         <div className='choosingWrapper' id='semesters'>
@@ -205,7 +217,9 @@ function CourseLayout(data) {
                         </div>
                         <div className="buttonsWrapper">
                                 <div className="goBackwardsDiv">
-                                        <button className="goBackwards">Reselect Courses</button>
+                                        <Link to={degree}>
+                                                <button className="goBackwards">&#60; Reselect Courses</button>
+                                        </Link>
                                 </div>
                                 <ExportCSV degreeCourses={list}/>
                         </div>
