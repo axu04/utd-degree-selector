@@ -1,3 +1,6 @@
+//Course Data Storing/Retreiving
+//Last Edited: Alec Xu -- July 19
+
 const express = require('express')
 const router = express.Router()
 const Course = require('../models/courses')
@@ -45,7 +48,7 @@ router.delete('/:id', getCourse, async (req, res) => {
         }
 })
 
-//geta course middleware function
+//get a course middleware function
 async function getCourse(req, res, next) {
         let course
         try {

@@ -1,8 +1,9 @@
+//Contains the declaration for hte CourseLayout componenet
+//Last Edited: Alec Xu -- July 19
+
 import React, { useState, useEffect, useRef } from 'react'
 import { animateScroll } from 'react-scroll'
 import './CourseLayout.css'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
 import ExportCSV from './ExportCSV'
 import { Link } from 'react-router-dom'
 import CourseLayoutResources from './CourseLayoutResources'
@@ -20,10 +21,14 @@ function CourseLayout(data) {
         const dragNode = useRef()
         const element = useRef(null)
 
+        //Method that is called whenever the showingMessage state is updated
+        //Function will scroll to the bottom of the page when updated
         useEffect(() => {
                 element.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
-        })
+        }, [showingMessage])
 
+        //Function that runs once when the component initially renders
+        //Gets the data from props passed in through the CourseDND and NextButton components
         useEffect(() => {
                 var courses = []
                 const getLocalStorage = JSON.parse(localStorage.getItem('DndMainItem'))
@@ -62,8 +67,9 @@ function CourseLayout(data) {
                         degree = data.location.myProps.degreeTitle
                 }
                 setDegree(degree)
-        }, [])
+        }, [data.location.myProps])
 
+        //Scrolls to the bottom of each semester box whenever the list state is updated
         useEffect(() => {
                 if (dragItem.current !== undefined && dragItem.current !== null) {
                         if (dragItem.current.semesterIndex !== 0) {
@@ -72,12 +78,22 @@ function CourseLayout(data) {
                 }
         }, [list])
 
+        //scrollToBottom() function
+        //Params: Nothing
+        //Returns: Nothing
+        //Does: Scrolls to the bottom of the div element given the 
+        //      semester index of the current item being dragged
         const scrollToBottom = () => {
                 animateScroll.scrollToBottom({
                         containerId: dragItem.current.semesterIndex
                 })
         }
 
+        //handDragStart() function
+        //Params: e - the event passed into the function
+        //        params - the arrayIndex and itemIndex of the item being dragged
+        //Returns: Nothing
+        //Does: Initializes data for dragNode and dragItem whenever an item is being dragged
         const handleDragStart = (e, params) => {
                 const target = e.target
 
@@ -91,6 +107,13 @@ function CourseLayout(data) {
                 }, 0) 
         }
 
+        //handleDragEnter() function
+        //Params: e - the event passed into the function
+        //        params - arrayIndex, itemIndex, typeList and onDiv values for the object 
+        //                 being entered
+        //Returns: Nothing 
+        //Does: Resets and updates the list state based on where the current item being dragged
+        //      is being dropped
         const handleDragEnter = (e, params) => {
                 if (params.onDiv === 'onDiv' || params.semesterIndex === dragItem.current.semesterIndex) {
                         return
@@ -110,6 +133,10 @@ function CourseLayout(data) {
                 }
         }
 
+        //handleDragEnd() function
+        //Params: e - event passed into the function
+        //Returns: Nothing
+        //Does: Sorts the 'Available Courses' list as well as clean up dragItem and dragNode values
         const handleDragEnd = (e) => {
                 setDragging(false)
                 dragItem.current = null
@@ -118,10 +145,20 @@ function CourseLayout(data) {
                 e.preventDefault()
         }
 
+        //dragOver() function
+        //Parameters: e - event that is passed into the function
+        //Returns: Nothing
+        //Does: Calls the preventDefault function in order to remove 
+        //      the 'draggable' reverting animation
         const dragOver = e => {
                 e.preventDefault()
         }
 
+        //getStyles() function
+        //Parameters: params - the item's arrayIndex as well as itemIndex
+        //Returns: The div element's className
+        //Does: Determines if the item being hovered over is the same as the item being dragged and returns
+        //      respective className for css styling
         const getStyles = (params) => {
                 const currentItem = dragItem.current
                 if (currentItem.semesterIndex === params.semesterIndex && currentItem.itemIndex === params.itemIndex) {
@@ -130,18 +167,29 @@ function CourseLayout(data) {
                 return 'selectedCourse'
         }
 
+        //changeOnClickState() function
+        //Parameters: e - event passed into the function
+        //            params - the arrayIndex and itemIndex of the current item being dragged
+        //Returns: Nothing
+        //Does: Updates if a course is showing it's description (requirements and credit hours)
         const changeOnClickState = (e, params) => {
                 if (dragging) {
                         return
                 }
                 setOnClickArray(oldArray => {
                         let newArray = [...oldArray]
-                        newArray[courseNameArray.indexOf(list[params.semesterIndex].courses[params.itemIndex].courseLabel)] = !newArray[courseNameArray.indexOf(list[params.semesterIndex].courses[params.itemIndex].courseLabel)]
+                        newArray[courseNameArray.indexOf(list[params.semesterIndex].courses[params.itemIndex].courseLabel)] = 
+                                !newArray[courseNameArray.indexOf(list[params.semesterIndex].courses[params.itemIndex].courseLabel)]
                         return newArray
                 })
                 
         }
 
+        //calculateHours() function
+        //Parameters: params - the semester being currently calculated
+        //Reutrns: the number of credit hours stored in that semester
+        //Does: Sums the total number of credit hours of all the courses in
+        //      the semester and returns the total
         const calculateHours = params => {
                 if (params.semester.courses.length === 0) {
                         return 0;
@@ -154,10 +202,18 @@ function CourseLayout(data) {
                 return sum
         }
 
+        //showHours() function
+        //Parameters: params - the course that is being clicked
+        //Reutrns: The number of hours 
+        //Does: Finds the number of credit hours is within the object passed in through params and returns a string 
         const showHours = params => {
                 return params.course.semesterHours.substring(1,params.course.semesterHours.length-1)
         }
 
+        //changeMessage() function
+        //Parameters: Nothing
+        //Returns: Nothing
+        //Does: Changes the state of showingMessage (true/false)
         const changeMessage = () => {
                 setShowingMessage(oldMessage => {
                         let newMessage = !oldMessage;
@@ -165,6 +221,10 @@ function CourseLayout(data) {
                 })
         }
 
+        //swapMessage() function
+        //Parameters: Nothing
+        //Returns: Div tag with the message being printed
+        //Does: Checks the state of showingMessage and returns the respective div tag
         const swapMessage = () => {
                 if (showingMessage === false) {
                         return <div>&#62; Information and More Resources</div>
@@ -174,9 +234,6 @@ function CourseLayout(data) {
         }
 
         const listsForEachSem = list
-
-        console.log(data.location.myProps)
-                
         return (<div>
                         <div className='choosingWrapper' id='semesters'>
                                 {listsForEachSem.map((semester, semesterIndex) => (

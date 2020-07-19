@@ -1,5 +1,7 @@
-const axios = require('axios')
+//Rest API declaration -- Add/Delete data from backend server
+//Last Edited: Alec Xu -- July 19
 
+const axios = require('axios')
 
 const api = axios.create({
         baseURL: `http://localhost:5000/`

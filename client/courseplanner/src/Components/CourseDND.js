@@ -1,3 +1,6 @@
+//Contains the declaration for CourseDND Component
+//Last Edit: Alec Xu -- July 19
+
 import React, { useEffect, useState, useRef } from 'react'
 import styles from './CourseDND.module.css'
 import apis from '../api/api'
@@ -17,6 +20,8 @@ function CourseDND(props) {
         const dragItem = useRef()
         const dragNode = useRef()
 
+        //Function that runs once when the component initially renders
+        //Gets data from API and sets the current state of the component
         useEffect( () => {
                 async function getData() {
                         var courseData = await apis.getAllCourses()
@@ -46,11 +51,14 @@ function CourseDND(props) {
                 getData()
         }, [])
 
+        //Updates the tempList state whenever searchValue is updated
         useEffect(() => {
-                resetTempList()
-                
+                resetTempList() 
+                // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [searchValue])
 
+        //Scrolls to the bottom of the 'selected courses' list whenever
+        //the list object is updated
         useEffect(() => {
                 resetTempList()
                 if (dragItem.current !== undefined && dragItem.current !== null) {
@@ -58,14 +66,23 @@ function CourseDND(props) {
                                 scrollToBottom()
                         }
                 }
+                // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [list])
 
+        //scrollToBottom() function
+        //Params: Nothing
+        //Returns: Nothing
+        //Does: Scrolls to the bottom of the div element with an id of 1
         const scrollToBottom = () => {
                 animateScroll.scrollToBottom({
                         containerId: 1
                 })
         }
 
+        //resetTempList() function
+        //Params: Nothing
+        //Returns: Nothing
+        //Does: Updates the tempList state based on the state of the list object
         const resetTempList = () => {
                 if (tempList[0] !== undefined) {
                         const selectedCourses = [ { title: 'Available Courses', courses: list[0].courses.filter((course) => { 
@@ -75,6 +92,11 @@ function CourseDND(props) {
                 }
         }
 
+        //handDragStart() function
+        //Params: e - the event passed into the function
+        //        params - the arrayIndex and itemIndex of the item being dragged
+        //Returns: Nothing
+        //Does: Initializes data for dragNode and dragItem whenever an item is being dragged
         const handleDragStart = (e, params) => {
                 resetTempList()
                 const target = e.target
@@ -89,25 +111,28 @@ function CourseDND(props) {
                 }, 0) 
         }
 
+        //handleDragEnter() function
+        //Params: e - the event passed into the function
+        //        params - arrayIndex, itemIndex, typeList and onDiv values for the object 
+        //                 being entered
+        //Returns: Nothing 
+        //Does: Resets and updates the list state based on where the current item being dragged
+        //      is being dropped
         const handleDragEnter = (e, params) => {
                 if (params.onDiv === 'onDiv' || params.arrayIndex === dragItem.current.arrayIndex) {
                         return
                 }
-
                 var currentItem = dragItem.current
                 var newCurrentItem = currentItem.itemIndex
-
                 if (params.onDiv === undefined && currentItem.arrayIndex === 0) {
                         params.itemIndex = list[1].courses.length;
                 }
                 if (params.onDiv === undefined && currentItem.arrayIndex === 1) {
                         params.itemIndex = list[0].courses.length;
                 } 
-
                 if (currentItem.arrayIndex !== 1) {
                         newCurrentItem = list[0].courses.indexOf(tempList[0].courses[currentItem.itemIndex])
                 }
-
                 if (e.target !== dragNode.current) {
                         setList((oldList) => {
                                 let newList = JSON.parse(JSON.stringify(oldList))
@@ -119,7 +144,11 @@ function CourseDND(props) {
                 }  
         }
 
-        const handleDragEnd = (e, params) => {
+        //handleDragEnd() function
+        //Params: e - event passed into the function
+        //Returns: Nothing
+        //Does: Sorts the 'Available Courses' list as well as clean up dragItem and dragNode values
+        const handleDragEnd = (e) => {
                 setDragging(false)
                 dragItem.current = null
                 dragNode.current = null
@@ -133,10 +162,20 @@ function CourseDND(props) {
                 })
         }
 
+        //dragOver() function
+        //Parameters: e - event that is passed into the function
+        //Returns: Nothing
+        //Does: Calls the preventDefault function in order to remove 
+        //      the 'draggable' reverting animation
         const dragOver = e => {
                 e.preventDefault()
         }
 
+        //getStyles() function
+        //Parameters: params - the item's arrayIndex as well as itemIndex
+        //Returns: The div element's className
+        //Does: Determines if the item being hovered over is the same as the item being dragged and returns
+        //      respective className for css styling
         const getStyles = (params) => {
                 const currentItem = dragItem.current
                 if (currentItem.arrayIndex === params.arrayIndex && currentItem.itemIndex === params.itemIndex) {
@@ -145,11 +184,20 @@ function CourseDND(props) {
                 return styles.dndItem
         }
 
+        //updateFilter() function
+        //Parameters: e - event that is passed into the function
+        //Returns: Nothing
+        //Does: Changes input to the input element to uppercase and updates the searchValue state
         const updateFilter = (e) => {
                 e.target.value = e.target.value.toUpperCase()
                 setSearchValue(e.target.value)
         }
 
+        //changeOnClickState() function
+        //Parameters: e - event passed into the function
+        //            params - the arrayIndex and itemIndex of the current item being dragged
+        //Returns: Nothing
+        //Does: Updates if a course is showing it's description (requirements and credit hours)
         const changeOnClickState = (e, params) => {
                 if (dragging) {
                         return
@@ -164,19 +212,30 @@ function CourseDND(props) {
                         let newArray = [...oldArray]
                         resetTempList()
                         if (params.arrayIndex === 0) {
-                                newArray[courseNameArray.indexOf(tempList[params.arrayIndex].courses[params.itemIndex].courseLabel)] = !newArray[courseNameArray.indexOf(tempList[params.arrayIndex].courses[params.itemIndex].courseLabel)]
+                                newArray[courseNameArray.indexOf(tempList[params.arrayIndex].courses[params.itemIndex].courseLabel)] = 
+                                        !newArray[courseNameArray.indexOf(tempList[params.arrayIndex].courses[params.itemIndex].courseLabel)]
                         } else {
-                                newArray[courseNameArray.indexOf(list[params.arrayIndex].courses[params.itemIndex].courseLabel)] = !newArray[courseNameArray.indexOf(list[params.arrayIndex].courses[params.itemIndex].courseLabel)]
+                                newArray[courseNameArray.indexOf(list[params.arrayIndex].courses[params.itemIndex].courseLabel)] = 
+                                        !newArray[courseNameArray.indexOf(list[params.arrayIndex].courses[params.itemIndex].courseLabel)]
                         }
                         return newArray
                 })
         }
 
+        //showHours() function
+        //Parameters: params - the course that is being clicked
+        //Reutrns: The number of hours 
+        //Does: Finds the number of credit hours is within the object passed in through params and returns a string 
         const showHours = params => {
                 return params.course.semesterHours.substring(1,params.course.semesterHours.length-1)
         }
 
-        const deleteSelected = params => {
+        //deleteSelected() function
+        //Parameters: Nothing
+        //Returns: Nothing
+        //Does: Delete all of the selected courses by resetting the list state to what was originally set 
+        //      in the first useEffect method
+        const deleteSelected = () => {
                 setList(oldList => {
                         var newList = JSON.parse(JSON.stringify(originalList))
                         localStorage.setItem('DndMainItem', JSON.stringify(newList))
@@ -184,6 +243,10 @@ function CourseDND(props) {
                 })
         }
 
+        //swapMessage() function
+        //Parameters: Nothing
+        //Returns: Div tag with the message being printed
+        //Does: Checks the state of showingMessage prop and returns the respective div tag
         const swapMessage = () => {
                 if (props.showingMessage === false) {
                         return <div>&#62; More Resources</div>

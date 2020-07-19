@@ -1,6 +1,8 @@
+//Contains the declaration for DegreeSelector Component
+//Last Edited: Alec Xu -- July 19
+
 import React from 'react'
 import apis from '../api/api'
-import axios from 'axios'
 import styles from './DegreeSelector.module.css'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'react-router-dom'
@@ -13,12 +15,14 @@ export default class DegreeSelector extends React.Component {
                 }
         }
 
+        //Method is called only once after the compoenent is first rendered 
+        //Gets all data from the api and changes the degree state data to 
+        //contain the information received from the api
         async componentDidMount() {
                 var degreeData = await apis.getAllDegrees()
                 var degrees = []
                 for (let i = 0; i < degreeData.data.length; i++) {
                         const degreeName = degreeData.data[i].degreeTitle
-                        console.log(degreeName)
                         degrees.push(degreeName)
                 }
 

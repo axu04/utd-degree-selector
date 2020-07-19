@@ -1,3 +1,6 @@
+//Contains the declaration of the HowToText component
+//Last Edited: Alec Xu -- July 19
+
 import React from 'react'
 import styles from './HowToText.module.css'
 

@@ -1,3 +1,6 @@
+//Course Data Schema Declaration
+//Last Edited: Alec Xu -- July 19
+
 const mongoose = require('mongoose')
 
 const courseSchema = mongoose.Schema({

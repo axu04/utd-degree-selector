@@ -1,14 +1,9 @@
-//courseScrape.js
 //File that contains the script to scrape course data using puppeteer
+//Last Edit: Alec Xu -- July 19
 
 const puppeteer = require('puppeteer')
 const apis = require('./api')
-const Course = require('./models/courses')
 
-//Add "open for good gpa people" - CLDP 4394
-//Fix duplicate department consent required - FIN 4380
-// fix duplicate instructor consent required - GEOS 4390
-// Students must also be enrolled in a 3000 or 4000-level performance ensemble. - MUSI 4V61
 async function scrapeWebsite(url, courseTopic) {
         const browser = await puppeteer.launch()
         const page = await browser.newPage()

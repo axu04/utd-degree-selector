@@ -1,7 +1,11 @@
+//Degree Data Storing/Retreiving
+//Last Edited: Alec Xu -- July 19
+
 const express = require('express')
 const router = express.Router()
 const Degree = require('../models/degrees')
 
+//Get all degrees
 router.get('/', async (req, res) => {
         try {
                 const degrees = await Degree.find()
@@ -11,10 +15,12 @@ router.get('/', async (req, res) => {
         }
 })
 
+//Get one degree
 router.get('/:id', getDegree, (req, res) => {
         res.send(res.degree)
 })
 
+//Add a degree
 router.post('/', (req, res) => {
         const newDegree = new Degree({ 
                 degreeTitle: req.body.degreeTitle,
@@ -29,6 +35,7 @@ router.post('/', (req, res) => {
         }
 })
 
+//Delete a degree
 router.delete('/:id', getDegree, async (req, res) => {
         try {
                 await res.degree.remove()
@@ -38,6 +45,7 @@ router.delete('/:id', getDegree, async (req, res) => {
         }
 })
 
+//Get a degree middleware function
 async function getDegree(req, res, next) {
         let degree
         try {

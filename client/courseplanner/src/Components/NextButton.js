@@ -1,9 +1,11 @@
+//Conatins the declaration for the NextButton component
+//Last Edited: Alec Xu -- July 19
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './NextButton.module.css'
 
 function NextButton(props) {
-        console.log(props.degreeTitle)
         return (<Link to={{
                         pathname: "/courseLayout",
                         myProps: {

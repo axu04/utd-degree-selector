@@ -1,3 +1,6 @@
+//Main backend server -- connects to online MongoDB Atlas Database
+//Last Edited: Alec Xu -- July 19
+
 if (process.env.NODE_ENV !== 'production') {
         require('dotenv').config()
 }

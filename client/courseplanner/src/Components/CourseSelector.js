@@ -1,20 +1,28 @@
+//Contains the declaration for the courseSelector component
+//Last Edited: Alec Xu -- July 19
+
 import React, { useState, useRef, useEffect } from 'react'
 import styles from './CourseSelector.module.css'
 import Requirements from './Requirements'
 import Fade from 'react-reveal/Fade'
 import CourseDND from './CourseDND'
 import CourseSelectorResources from './CourseSelectorResources'
-import { animateScroll } from 'react-scroll'
 
 function CourseSelector(props) {
         const [showingMessage, setShowingMessage] = useState(false)
 
         const element = useRef(null)
 
+        /*Method scrolls to the bottom of the page whenever the showingMessage 
+        state is updated */
         useEffect(() => {
                 element.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
         })
 
+        //changeMessage() function
+        //Parameters: Nothing
+        //Returns: Nothing
+        //Does: Changes the state of showingMessage (true/false)
         const changeMessage = () => {
                 setShowingMessage(oldMessage => {
                         let newMessage = !oldMessage;

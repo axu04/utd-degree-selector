@@ -1,15 +1,18 @@
+//Contains the declaration for the Homepage component
+//Last Edited: Alec Xu -- July 19
+
 import React from 'react'
 import styles from './Homepage.module.css'
 import { Link } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
-import logo from '../mainLogo.png'
+import logo from '../mainLogo2.png'
 
 export default class Homepage extends React.Component {
         render() {
                 return  <div> 
 
                                 <Fade top>
-                                        <img src={logo} width="8%" height="8%" className={styles.logo}></img>  
+                                        <img src={logo} alt="Logo" width="8%" height="8%" className={styles.logo}></img>  
                                 </Fade>
                                 <Fade left><div className={styles.title}>UTD 4-Year Planner</div></Fade>
                                 <Fade right>

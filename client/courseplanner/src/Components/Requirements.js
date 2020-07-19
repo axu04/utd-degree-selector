@@ -1,3 +1,6 @@
+//Contains the declaration for the Requirements component
+//Last Edited: Alec Xu -- July 19
+
 import React from 'react'
 import './Requirements.css'
 import apis from '../api/api'
@@ -10,9 +13,11 @@ export default class Requirements extends React.Component {
                 }
         }
 
+        //Method is called once after the component first renders 
+        //Calls the api to retrieve requirements data for a particular degree 
+        //and sets the degreeInfo state with the given data
         async componentDidMount() {
                 var data = await apis.getDegreeById(this.props.degreeName)
-                console.log(this.props.degreeName)
                 for (let i = 0; i < data.data.degreeData.length; i++) {
                         const dataInformation = data.data.degreeData[i][0];
                         if (i === 0) {
