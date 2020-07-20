@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 The first time that the projected is cloned, you can run:
 
-### 'npm install'
+### `npm install`
 
 to install all dependencies.
 
