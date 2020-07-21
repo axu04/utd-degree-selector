@@ -1,6 +1,6 @@
 //Contains the declaration for the CourseLayoutResources component
-//Lists extra resources from UTD as well as disclaimers
-//Last Edited: Alec Xu -- July 19
+//Lists extra resources from UTD as well as disclaimers and instructions on exporting options
+//Last Edited: Tanmay Karandikar -- July 21
 
 import React from 'react'
 import styles from './CourseLayoutResources.module.css'
@@ -10,10 +10,10 @@ function CourseLayoutResources() {
         return (<div className={styles.disclaimerWrapper}>
                         <div className={styles.disclaimerHead}>Exporting Options</div>
                         <div className={styles.disclaimerSmall}>
-                                To export as a table including information on semester hours and prerequisites, click the Export to Excel option. This creates a .csv file that can be converted into an Excel file by: choosing File, Save as, .xlsx or .xls. Alternatively, this information can be copied and pasted into a different spreadsheet location that you prefer.
+                                To export as a table including information on semester hours and prerequisites, click the Export to Excel option. This creates a .csv file that can be converted into an Excel file by choosing File, selecting Save as, and picking .xlsx or .xls. Alternatively, this information can be copied and pasted into a different spreadsheet location that you prefer.
                         </div>
                         <div className={styles.disclaimerSmall}>
-                                On the other hand, if you would like to save your created degree plan with the box grid above, press control p (or command p on Mac) and make the destination a save as pdf. Be aware that based on height restrictions, not all information may be captured. For highest quality use landscape, but if courses are not visible in this orientation, switch to portrait.
+                                On the other hand, if you would like to save your created degree plan with the box grid above, press control p (or command p on Mac) and make the destination a save as pdf. Be aware that based on height restrictions, not all information may be captured. For the highest quality use landscape, but if courses are not visible in this orientation, switch to portrait.
                         </div>
                         <div className={styles.disclaimerHead}>Degree Planning Resources</div>
 
@@ -50,7 +50,7 @@ function CourseLayoutResources() {
                                 <a href="https://catalog.utdallas.edu/2020/undergraduate/policies/graduation#graduation-requirements" target="_blank" rel="noopener noreferrer">Graduation Requirements</a>
                         </div>
                         <div className={styles.disclaimerPg}>
-                                <a href="https://catalog.utdallas.edu/2020/undergraduate/courses" target="_blank" rel="noopener noreferrer">List of all Undergraduate Courses</a>
+                                <a href="https://catalog.utdallas.edu/2020/undergraduate/courses" target="_blank" rel="noopener noreferrer">List of All Undergraduate Courses</a>
                         </div>
                         <div className={styles.disclaimerPg}>
                                 <a href="https://coursebook.utdallas.edu/" target="_blank" rel="noopener noreferrer">UTD Coursebook</a>
@@ -61,7 +61,7 @@ function CourseLayoutResources() {
 
                         <div className={styles.disclaimerHead2}>Disclaimers</div>
                         <div className={styles.disclaimerSmall}>
-                                If seeking a double major or double degree one should check the requirements found in the degree planning resources. Also, your current selected courses will remain selected if you return to the degree list.
+                                If seeking a double major or degree, one should check the requirements found in the degree planning resources. Also, your current selected courses will remain selected if you return to the degree list.
                         </div>
                         <div className={styles.disclaimerSmall}>
                                 Verify your degree plan with your academic advisor to ensure accurate semester class offerings, prerequisite flow, and degree requirements are met. 

@@ -1,6 +1,6 @@
 //Contains the declaration for the CourseSelectorResources component
-//Lists extra resources from UTD as well as disclaimers and instructions on exporting options
-//Last Edited: Alec Xu -- July 19
+//Lists extra resources from UTD as well as disclaimers
+//Last Edited: Tanmay Karandikar -- July 21
 
 import React from 'react'
 import styles from './CourseSelectorResources.module.css'
@@ -54,7 +54,7 @@ function CourseSelectorResources() {
 
                         <div className={styles.disclaimerHead2}>Disclaimers</div>
                         <div className={styles.disclaimerSmall}>
-                                If seeking a double major or double degree one should check the requirements found in the degree planning resources. Also, your current selected courses will remain selected if you return to the degree list.
+                                If seeking a double major or degree, one should check the requirements found in the degree planning resources. Also, your current selected courses will remain selected if you return to the degree list.
                         </div>
                         <div className={styles.disclaimerSmall}>
                                 Verify your degree plan with your academic advisor to ensure accurate semester class offerings, prerequisite flow, and degree requirements are met. 

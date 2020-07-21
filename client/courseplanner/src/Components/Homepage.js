@@ -22,7 +22,7 @@ export default class Homepage extends React.Component {
 
                                 </Fade>
                                 <Fade bottom>
-                                        <div className={styles.acknowledgements}>Created by Alec Xu and Tanmay Karandikar.</div>
+                                        <div className={styles.acknowledgements}>Created by Alec Xu and Tanmay Karandikar</div>
                                 </Fade>
                                 
                         </div>

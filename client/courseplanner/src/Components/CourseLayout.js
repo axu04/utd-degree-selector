@@ -1,5 +1,5 @@
-//Contains the declaration for hte CourseLayout componenet
-//Last Edited: Alec Xu -- July 19
+//Contains the declaration for the CourseLayout componenet
+//Last Edited: Tanmay Karandikar -- July 21
 
 import React, { useState, useEffect, useRef } from 'react'
 import { animateScroll } from 'react-scroll'
@@ -7,6 +7,7 @@ import './CourseLayout.css'
 import ExportCSV from './ExportCSV'
 import { Link } from 'react-router-dom'
 import CourseLayoutResources from './CourseLayoutResources'
+import Fade from 'react-reveal/Fade'
 
 function CourseLayout(data) {
         const [list, setList] = useState([])
@@ -235,9 +236,10 @@ function CourseLayout(data) {
 
         const listsForEachSem = list
         return (<div>
-                        <div className='choosingWrapper' id='semesters'>
-                                {listsForEachSem.map((semester, semesterIndex) => (
-                                        <div 
+                        <Fade left>
+                                <div className='choosingWrapper' id='semesters'>
+                                        {listsForEachSem.map((semester, semesterIndex) => (
+                                                <div 
                                                         key={semesterIndex}
                                                         id={semesterIndex}
                                                         className={semester.stylingName}
@@ -270,24 +272,31 @@ function CourseLayout(data) {
                                                                                                                                                         <div>---------</div>
                                                                                                                                                         {showHours({course})}
                                                                                                                                                 </div> : null }
-                                                        </div>
+                                                                </div>
                                                         
-                                                ))}
+                                                        ))}
                                                 
-                                                <div></div>
-                                        </div>
-                                ))}     
-                        </div>
+                                                        <div></div>
+                                                </div>
+                                        ))}     
+                                </div>
+                        </Fade>
                         <div className="buttonsWrapper">
-                                <div className="infoWrapper">
-                                        <button className="moreResources" onClick={changeMessage}><div className="buttonText">{swapMessage()}</div></button>
-                                </div>
-                                <div className="goBackwardsDiv">
-                                        <Link to={degree}>
-                                                <button className="goBackwards">&#60; Reselect Courses</button>
-                                        </Link>
-                                </div>
-                                <ExportCSV degreeCourses={list}/>
+                                <Fade left>
+                                        <div className="infoWrapper">
+                                                <button className="moreResources" onClick={changeMessage}><div className="buttonText">{swapMessage()}</div></button>
+                                        </div>
+                                </Fade>
+                                <Fade right>
+                                        <div className="goBackwardsDiv">
+                                                <Link to={degree}>
+                                                        <button className="goBackwards">&#60; Reselect Courses</button>
+                                                </Link>
+                                        </div>
+                                </Fade>
+                                <Fade right>
+                                        <ExportCSV degreeCourses={list}/>
+                                </Fade>
                         </div>
                         {showingMessage ? <CourseLayoutResources /> : null}
                         <div id={'element'} ref={element}></div>
