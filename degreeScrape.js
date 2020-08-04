@@ -9,18 +9,15 @@ async function scrapeDegrees(url) {
         const page = await browser.newPage()
         await page.goto(url)
         const requirements = []
-        var counter = 6
-        const degreeTitle = '' /* <--- DEGREE NAME HERE*/
+        var counter = 1;
+        const degreeTitle = 'Minor in Secondary STEM Education' /* <--- DEGREE NAME HERE*/
         const twoNums = []
         const threeNums = []
         const ignore = []
         const twoDigit = []
         const twoNumsButLarge = []
         const diffType = []
-        for (let i = 111; i < 192; i++) {
-                if (i === 189) {
-                        continue
-                }
+        for (let i = 103; i < 116; i++) {
                 const [courseRequirements] = await page.$x(`/html/body/div[1]/div[1]/article/div[1]/p[${i}]`)
                 const courseRequirementsTxt = await courseRequirements.getProperty('textContent')
                 var courseReqFinal = await courseRequirementsTxt.jsonValue()
@@ -51,11 +48,11 @@ async function scrapeDegrees(url) {
                 var id = await className.jsonValue()
                 classNameObj = classNameObj.slice(0, 8)
                 id = id.slice(id.length-6, id.length)
-
+                console.log(courseReqFinal, classNameObj, id)
                 requirements.push([courseReqFinal, classNameObj, id])   
                 
                 if (diffType.indexOf(i) !== -1) {
-                        const [courseRequirements] = await page.$x(`/html/body/div[1]/div[1]/article/div[1]/h3[${counter}]`)
+                        const [courseRequirements] = await page.$x(`/html/body/div[1]/div[1]/article/div[1]/h4[${counter}]`)
                         const courseRequirementsTxt = await courseRequirements.getProperty('textContent')
                         var courseReqFinal = await courseRequirementsTxt.jsonValue()
 
@@ -92,14 +89,14 @@ async function deleteAllDegrees() {
 }
 
 async function deleteDegree() {
-        await apis.deleteDegree('**DEGREE NAME HERE**')
+        await apis.deleteDegree('Minor in Supply Chain Management')
 }
 
 // deleteDegree()
 
 // changeData()
 
-// scrapeDegrees('https://catalog.utdallas.edu/2020/undergraduate/programs/nsm/')
+scrapeDegrees('https://catalog.utdallas.edu/2020/undergraduate/programs/nsm/minors')
 // deleteAllDegrees()
 
 
